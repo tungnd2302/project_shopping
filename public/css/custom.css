@@ -1,0 +1,125 @@
+
+.custom_box{
+	padding: 10px;
+}
+
+.custom_content_box{
+	background-color: #fff;
+	padding: 20px;
+	text-align: center;
+	border-radius: 45px;
+	box-shadow: 10px 10px 10px 10px #ccc;
+}
+
+.custom_image_box{
+margin-bottom: 15px
+}
+
+.custom_title{
+	font-size: 22px;
+}
+
+.max_width{
+	width: 100%;
+}
+
+.fontsize20{
+	font-size: 20px;
+}
+
+.fontsize16{
+	font-size: 16px;
+}
+
+
+.custom-form-control {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+}
+
+
+.custom-button{
+    padding: 11px 12px;
+    border-radius: 5px;
+}
+
+.custom-border{
+	border: 2px solid #dee2e6;
+}
+
+.fontsize18{
+	font-size: 18px;
+}
+
+.all-border{
+    border: 1px solid #333;
+}
+
+.wrapped-by-border{
+    border: 1px solid #CCF;
+    border-radius: 10px;
+}
+
+.no-padding-tb{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.product_Image{
+    text-align: center;
+}
+
+.hr_bot{
+    width: 70%;
+    height: 1px;
+    background-color: #81ecec;
+    margin-top: 15px;
+    margin-left: 15%;
+}
+
+.product-infomation,
+.customer-infomation{
+    margin-top: 15px;
+    text-align: center;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.product-infomation-name span,
+.customer-infomation-name span{
+    font-size: 20px;
+}
+
+.product-infomation-price,
+.customer-infomation-type{
+    margin-top: 7px;
+}
+
+.product-infomation-price span,
+.customer-infomation-type span{
+    font-size: 18px;
+}
+
+.options_product{
+    padding-left: 15px;
+    padding-right: 15px; 
+    padding-top: 30px;
+}
+
