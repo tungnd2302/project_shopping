@@ -11,7 +11,7 @@
 |
 */
 
-	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('/', 'HomeController@index')->name('home');
 	Route::prefix('/categories')->group(function () {
 	    Route::get('/','CategoriesController@index')->name('backend.category.index');
 		Route::get('/create','CategoriesController@create')->name('backend.category.create');
