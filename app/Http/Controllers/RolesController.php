@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreRolesRequest;
 
 class RolesController extends Controller
 {   
@@ -35,9 +36,13 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRolesRequest $request)
     {
-        //
+        // echo '<pre>';
+        // print_r($request->validated());
+        // echo '</pre>';
+        // die;
+        // return route('backend.role.create')
     }
 
     /**

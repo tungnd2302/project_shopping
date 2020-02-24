@@ -16,29 +16,38 @@
           <h4>Thêm mới</h4>
         </div>
         <div class="panel-body">
-          <form action="#" method="post" id="create_form">
+          @if ($errors->any())
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+          <form action="{{ route('backend.role.store')}}" method="post">
             @csrf
                 <div class="col-md-12">
                   <div>
                     <span style="font-size: 20px">Tên chức vụ</span>
                   </div>
-                  <input type="text" name="txtTenSanPham" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên chức vụ">
+                  <input type="text" name="name" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên chức vụ">
                 </div>
                 <div class="col-md-12" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Chọn trạng thái</span>
                   </div>
-                  <select class="custom-form-control" style="margin-top: 10px">
-                    <option value="">-- Chọn trạng thái --</option>
-                    <option value="">Hoạt động</option>
-                    <option value="">Không hoạt động</option>
+                  <select name="status" class="custom-form-control" style="margin-top: 10px">
+                    <option value="-1">-- Chọn trạng thái --</option>
+                    <option value="0">Hoạt động</option>
+                    <option value="1">Không hoạt động</option>
                   </select>
                 </div>
                 <div class="col-md-12"style="margin-top: 20px;">
                    <div style="margin-bottom: 10px">
                     <span style="font-size: 20px">Mô tả chức vụ</span>
                   </div>
-                  <textarea name="" id="editor1" style="margin-top: 10px"></textarea>
+                  <textarea name="description" id="editor1" style="margin-top: 10px"></textarea>
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
                    <button type="submit" class="btn btn-primary custom-button" style="width: 100%">

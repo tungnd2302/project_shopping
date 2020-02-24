@@ -57,8 +57,7 @@
               <th width="15%" >Họ tên</th>
               <th width="15%" >Chức vụ</th>
               <th width="15%" >Email</th>
-              <th width="15%">Số điện thoại</th>
-              <th width="15%">Trạng thái</th>
+              <th width="13%">Số điện thoại</th>
               <th>Thao tác</th>
             </tr>
             <tr>
@@ -67,7 +66,6 @@
               <td>Administrator</td>
               <td>tungnd0318@gmail.com</td>
               <td>096 663 7498</td>
-              <td>Đang hoạt động</td>
               <td>
                 <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
                    <span style="margin-right: 3px">Xem</span>
@@ -90,7 +88,6 @@
               <td>Administrator</td>
               <td>tungnd0318@gmail.com</td>
               <td>096 663 7498</td>
-              <td>Đang hoạt động</td>
               <td>
                 <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
                    <span style="margin-right: 3px">Xem</span>
@@ -113,7 +110,6 @@
               <td>Administrator</td>
               <td>tungnd0318@gmail.com</td>
               <td>096 663 7498</td>
-              <td>Đang hoạt động</td>
               <td>
                 <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
                    <span style="margin-right: 3px">Xem</span>
@@ -136,7 +132,6 @@
               <td>Administrator</td>
               <td>tungnd0318@gmail.com</td>
               <td>096 663 7498</td>
-              <td>Đang hoạt động</td>
               <td>
                 <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
                    <span style="margin-right: 3px">Xem</span>

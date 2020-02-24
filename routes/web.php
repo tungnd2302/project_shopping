@@ -10,9 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+	
+	//  Route::group([
+ //            'prefix'     => 'admin',
+ //            'middleware' => [
+ //                'auth',
+ //                'anotherMiddleware',
+ //                'yetAnotherMiddleware',
+ //            ],
+ //        ], function() {
+            
+ //           Route::get('dashboard', function() {} );
+ // });
 	Route::get('/', 'HomeController@index')->name('home');
-	Route::prefix('/categories')->group(function () {
+	Route::prefix('/categories',['middleware' => 'checkadmin'])->group(function () {
 	    Route::get('/','CategoriesController@index')->name('backend.category.index');
 		Route::get('/create','CategoriesController@create')->name('backend.category.create');
 		Route::post('/store','CategoryController@store')->name('backend.category.store');
@@ -70,6 +81,7 @@
 	Route::prefix('user/roles')->group(function () {
 		Route::get('/','RolesController@index')->name('backend.role.index');
 		Route::get('/create','RolesController@create')->name('backend.role.create');
+		Route::post('/store','RolesController@store')->name('backend.role.store');
 		Route::get('/edit/{id}','RolesController@edit')->name('backend.role.edit');
 	});
 
@@ -89,6 +101,6 @@
 		Route::get('/show/{id}','UsersController@show')->name('backend.user.show');
 	});
 
-Auth::routes();
+	Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
