@@ -19,6 +19,9 @@
 	                  </span>
 	                    <hr style="width: 100px;height: 5px;background: #FEB58A;border-radius: 3px;margin-left: auto; margin-right: auto;">
 	                </div>
+	                @if($errors->any())
+	                    <div class="alert alert-danger">sai tên đăng nhập hoặc mật khẩu</div>
+	                @endif
 	                <form method="POST" action="{{ route('login') }}">
 	                	@csrf
 	                    <div class="form-group">
