@@ -78,12 +78,11 @@
 		Route::get('/edit/{id}','CustomerTypesController@edit')->name('backend.customerType.edit');
 	});
 
-	Route::prefix('user/roles')->group(function () {
-		Route::get('/','RolesController@index')->name('backend.role.index');
-		Route::get('/create','RolesController@create')->name('backend.role.create');
-		Route::post('/store','RolesController@store')->name('backend.role.store');
-		Route::get('/edit/{id}','RolesController@edit')->name('backend.role.edit');
-	});
+	// Route::prefix('user/roles')->group(function () {
+	// 	Route::get('/','RolesController@index')->name('backend.role.index');
+	// 	Route::get('/create','RolesController@create')->name('backend.role.create');
+	// 	Route::get('/edit/{id}','RolesController@edit')->name('backend.role.edit');
+	// });
 
 	Route::prefix('user/roles')->group(function () {
 	    Route::get('/','RolesController@index')->name('backend.role.index');
@@ -91,6 +90,9 @@
 		Route::get('/edit/{id}','RolesController@edit')->name('backend.role.edit');
 		Route::get('/overview','RolesController@overview')->name('backend.role.overview');
 		Route::get('/show/{id}','RolesController@show')->name('backend.role.show');
+		Route::post('/store','RolesController@store')->name('backend.role.store');
+		Route::any('/search','RolesController@search')->name('backend.role.search');
+
 	});
 
 	Route::prefix('/users')->group(function () {

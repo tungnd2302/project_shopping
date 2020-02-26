@@ -26,7 +26,6 @@ class StoreRolesRequest extends FormRequest
         return [
            'name'            => 'required|min:5|max:100',
            'status'          => 'in:0,1,2',
-           'description'     => 'required|min:5|max:255',
         ];
     }
 
@@ -36,7 +35,7 @@ class StoreRolesRequest extends FormRequest
             'max'       => ':attribute không được lớn hơn :max',    
             'min'       => ':attribute không được nhỏ hơn :max',    
             'required'  => ':attribute không được để trống',
-            'in'        => 'chọn không đúng :attribute',
+            'in'        => 'Phải chọn :attribute',
             'min'       => ':attribute không được nhỏ hơn :min',
         ];
     }

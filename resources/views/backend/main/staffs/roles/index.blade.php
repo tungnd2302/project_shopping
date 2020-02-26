@@ -16,12 +16,13 @@
          <h4>Tìm kiếm</h4>
         </div>
         <div class="panel-body">
-            <form action="#" method="post">
+            <form action="{{ route('backend.role.search') }}" method="post">
+              @csrf
                 <div class="col-md-10">
-                  <input type="" name="" class="custom-form-control" placeholder="Nhập chức vụ cần tìm kiếm">
+                  <input type="text" name="name" class="custom-form-control" placeholder="Nhập chức vụ cần tìm kiếm">
                 </div>
                 <div class="col-md-2">
-                   <button type="button" class="btn btn-primary custom-button" style="width: 100%; font-size: 18px" >
+                   <button type="submit" class="btn btn-primary custom-button" style="width: 100%; font-size: 18px">
                     <span class="fa fa-search"></span>
                     Tìm kiếm
                   </button>
@@ -37,81 +38,33 @@
           <table class="table table-bordered" bgcolor="#333">
             <tr>
               <th width="3%">#</th>
-              <th width="15%" >Tên chức vụ</th>
-              <th width="45%" >Mô tả</th>
-              <th width="14%">Ngày tạo</th>
-              <th width="14%">Trạng thái</th>
+              <th width="25%" >Tên chức vụ</th>
+              <th width="40%" >Mô tả</th>
+              <th width="18%">Trạng thái</th>
               <th>Thao tác</th>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Nhân viên bán hàng</td>
-              <td>Người bán hàng online, chốt đơn, kiếm tra hàng tồn và tạo báo cáo hằng tuần</td>
-              <td>20/02/2020</td>
-              <td>Đang hoạt động</td>
-              <td>
-                 <a href="{{ url('/user/roles/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>2</td>
-              <td>Nhân viên bán hàng</td>
-              <td>Người bán hàng online, chốt đơn, kiếm tra hàng tồn và tạo báo cáo hằng tuần</td>
-              <td>20/02/2020</td>
-              <td>Đang hoạt động</td>
-              <td>
-                 <a href="{{ url('/user/roles/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-              </td>
-            </tr>
-
-             <tr>
-              <td>3</td>
-              <td>Nhân viên bán hàng</td>
-              <td>Người bán hàng online, chốt đơn, kiếm tra hàng tồn và tạo báo cáo hằng tuần</td>
-              <td>20/02/2020</td>
-              <td>Đang hoạt động</td>
-              <td>
-                 <a href="{{ url('/user/roles/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-              </td>
-            </tr>
-
-             <tr>
-              <td>4</td>
-              <td>Nhân viên bán hàng</td>
-              <td>Người bán hàng online, chốt đơn, kiếm tra hàng tồn và tạo báo cáo hằng tuần</td>
-              <td>20/02/2020</td>
-              <td>Đang hoạt động</td>
-              <td>
-                 <a href="{{ url('/user/roles/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-              </td>
-            </tr>
-           
-              
+            @foreach($roles as $key => $role)
+                <tr>
+                  <td>{{ $roles->firstItem() + $key }}</td>
+                  <td>{{ $role->name }}</td>
+                  <td>{!! $role->description !!}</td>
+                  <td>
+                    {{ ($role->status == 1) ? 'Đang hoạt động' : 'Không hoạt động'}}
+                  </td>
+                  <td>
+                     <a href="{{ url('/user/roles/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
+                       <span style="margin-right: 3px">Sửa</span>
+                      <span class="fa fa-pencil"></span>
+                    </a>
+                  </td>
+                </tr>
+            @endforeach
           </table>
-          <ul class="pagination pagination">
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-</ul>
+          {{ $roles->render() }}
         </div>
       </div> 
     </section>
-    
+    @include('sweetalert::alert')
     <!-- /.content -->
   </div>
 @endsection

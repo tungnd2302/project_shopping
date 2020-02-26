@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use JsValidator;
 use App\Http\Requests\StoreRolesRequest;
-
+use App\Models\Role as role;
+use Alert;
 class RolesController extends Controller
 {   
     public function overview(){
@@ -17,7 +19,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('backend.main.staffs.roles.index');
+        $roles = Role::paginate(3);
+        return view('backend.main.staffs.roles.index',compact('roles'));
     }
 
     /**
@@ -38,9 +41,13 @@ class RolesController extends Controller
      */
     public function store(StoreRolesRequest $request)
     {
-        // echo '<pre>';
-        // print_r($request->validated());
-        // echo '</pre>';
+        $role = new Role;
+        $role->name = $request->name;
+        $role->status = $request->status;
+        $role->description = $request->description;
+        $role->save();
+        alert()->success('Thêm chức vụ thành công', 'Successfully'); ;
+        return redirect()->route('backend.role.index');
         // die;
         // return route('backend.role.create')
     }
@@ -90,9 +97,15 @@ class RolesController extends Controller
         //
     }
 
-    // Thêm số lượng sản phẩm
-    public function addmore($id)
-    {
-        return view('backend.main.staffs.roles.addmore');
+    // Tìm kiếm chức vụ
+    public function search(Request $request)
+    {   
+
+        $roles = role::where('name','like',"%$request->name%")->paginate(3)->setpath(''); // => Xem lại code
+        // echo '<pre>';
+        // print_r($roles);
+        // echo '</pre>';
+       return view('backend.main.staffs.roles.index',compact('roles'));
     }
+
 }
