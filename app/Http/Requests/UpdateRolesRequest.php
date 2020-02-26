@@ -3,8 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
-class StoreRolesRequest extends FormRequest
+use Illuminate\Validation\Rule;
+class UpdateRolesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,14 @@ class StoreRolesRequest extends FormRequest
      */
     public function rules()
     {
+        // echo 'aaaaaaaaaa'.$this->id;
         return [
-           'name'            => 'required|unique:roles|min:5|max:100',
+           'name'            => [
+                                  'required',
+                                   'min:5',
+                                   'max:100',
+                                   Rule::unique('roles')->ignore($this->id)
+                               ],
            'status'          => 'in:0,1,2',
         ];
     }
@@ -44,7 +50,7 @@ class StoreRolesRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'          => 'Tên chức vu',
+            'name'          => 'Tên chức vụ',
             'status'        => 'Trạng thái',
             'description'   => 'Mô tả',
         ];

@@ -91,7 +91,8 @@
 		Route::get('/overview','RolesController@overview')->name('backend.role.overview');
 		Route::get('/show/{id}','RolesController@show')->name('backend.role.show');
 		Route::post('/store','RolesController@store')->name('backend.role.store');
-		Route::any('/search','RolesController@search')->name('backend.role.search');
+		Route::get('/search','RolesController@search')->name('backend.role.search');
+		Route::post('/update','RolesController@update')->name('backend.role.update');
 
 	});
 
