@@ -11,7 +11,7 @@ class Bill_detail extends Model
     protected $table = 'bill_detail';
 
     protected function products(){
-        return $this->belongsToMany(Bill_detail::class,'product_billDetail','bill_detail_id','product_id');
+        return $this->hasMany(Product::class);
     }
 
     protected function bill(){

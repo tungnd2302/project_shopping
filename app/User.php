@@ -5,6 +5,7 @@ namespace App;
 use App\Models\User_info;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -51,5 +52,9 @@ class User extends Authenticatable
 
     public function categories(){
         return $this->hasMany(Category::class);
+    }
+
+    protected function roles(){
+        return $this->belongsToMany(Role::class,'user_info','user_id','role_id');
     }
 }

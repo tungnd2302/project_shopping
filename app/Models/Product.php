@@ -26,8 +26,8 @@ class Product extends Model
     	return $this->belongsTo(User::class);
     }
 
-    protected function bill_details(){
-        return $this->belongsToMany(Bill_detail::class,'product_billDetail','product_id','bill_detail_id');
+    protected function bill_detail(){
+        return $this->belongsTo(Bill_detail::class);
     }
 
 }
