@@ -46,7 +46,7 @@ class RolesController extends Controller
         $role->status = $request->status;
         $role->description = $request->description;
         $role->save();
-        alert()->success('Thêm chức vụ thành công', 'Successfully'); ;
+        alert()->success('Thêm chức vụ thành công', 'Successfully');
         return redirect()->route('backend.role.index');
         // die;
         // return route('backend.role.create')
