@@ -113,11 +113,15 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        role::destroy($id);
+    public function destroy(Request $request)
+    {   
+        // echo '<pre>';
+        // print_r($request->id);
+        // echo '</pre>';
+        role::destroy($request->id);
         alert()->success('Xóa chức vụ thành công', 'Successfully');
-        return redirect()->route('backend.role.index');
+         // return redirect('/user/roles?page='.$request->input('page'));
+        return redirect()->back();
     }
 
     // Tìm kiếm chức vụ

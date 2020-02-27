@@ -44,6 +44,13 @@
               <th>Thao tác</th>
             </tr>
             @foreach($roles as $key => $role)
+            @php 
+              $page = $roles->currentPage();
+              if(count($roles) ==  0) {
+                $previousPage = $page - 1;  
+                return redirect('/user/roles?page='.$previousPage);
+              }
+            @endphp
                 <tr>
                   <td>{{ $roles->firstItem() + $key }}</td>
                   <td>{{ $role->name }}</td>
@@ -74,7 +81,7 @@
                            </div>
                            <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <form style="display: inline-block;" action="{{ route('backend.role.destroy', $role->id) }}" method="post" accept-charset="utf-8">
+                            <form style="display: inline-block;" action="{{ route('backend.role.destroy', ['id'=>$role->id, 'page'=>$page]) }}" method="post" accept-charset="utf-8">
                               @csrf
                               {{method_field('delete')}}
                               <button type="submit" class="btn btn-danger">Đồng ý</button>
