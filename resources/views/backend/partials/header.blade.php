@@ -20,7 +20,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ asset('images/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Tùng Nguyễn</span>
+              <span class="hidden-xs">{{ Illuminate\Support\Facades\Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
