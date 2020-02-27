@@ -93,6 +93,7 @@
 		Route::post('/store','RolesController@store')->name('backend.role.store');
 		Route::get('/search','RolesController@search')->name('backend.role.search');
 		Route::post('/update','RolesController@update')->name('backend.role.update');
+		Route::delete('/destroy/{id}', 'RolesController@destroy')->name('backend.role.destroy');
 
 	});
 

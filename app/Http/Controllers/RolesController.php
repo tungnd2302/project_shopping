@@ -103,7 +103,7 @@ class RolesController extends Controller
         $role->status = $request->status;
         $role->description = $request->description;
         $role->save();
-        alert()->success('Sửa chức vụ thành công', 'Successfully'); ;
+        alert()->success('Sửa chức vụ thành công', 'Successfully');
         return redirect()->route('backend.role.index');
     }
 
@@ -115,7 +115,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        role::destroy($id);
+        alert()->success('Xóa chức vụ thành công', 'Successfully');
+        return redirect()->route('backend.role.index');
     }
 
     // Tìm kiếm chức vụ
