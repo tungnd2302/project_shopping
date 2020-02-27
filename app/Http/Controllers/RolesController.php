@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use JsValidator;
 use App\Http\Requests\StoreRolesRequest;
+use App\Http\Requests\UpdateRolesRequest;
 use App\Models\Role as role;
 use Alert;
 class RolesController extends Controller
@@ -36,11 +37,22 @@ class RolesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $request`
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRolesRequest $request)
     {
+        $role = role::where('name','=',"$request->name")->get();
+        // echo '<pre>';
+        // print_r($role);
+        // echo '</pre>';
+        // die;
+        // if(count($role) > 0){
+        //     echo 'Tồn tại';
+        // }else{
+        //     echo 'Không tồn tại';
+        // }
+        // die;
         $role = new Role;
         $role->name = $request->name;
         $role->status = $request->status;
@@ -70,8 +82,11 @@ class RolesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        return view('backend.main.staffs.roles.edit');
+    {   
+
+        $role = role::find($id);
+       
+        return view('backend.main.staffs.roles.edit',compact('role'));
     }
 
     /**
@@ -81,9 +96,15 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRolesRequest $request)
     {
-        //
+        $role = role::find($request->id);
+        $role->name = $request->name;
+        $role->status = $request->status;
+        $role->description = $request->description;
+        $role->save();
+        alert()->success('Sửa chức vụ thành công', 'Successfully'); ;
+        return redirect()->route('backend.role.index');
     }
 
     /**
@@ -100,12 +121,15 @@ class RolesController extends Controller
     // Tìm kiếm chức vụ
     public function search(Request $request)
     {   
+        $result  = $request->name;
+        $roles = role::where('name','like',"%$request->name%")
+                 ->paginate(3);
+         $roles->appends(['name' => $request->name]);
 
-        $roles = role::where('name','like',"%$request->name%")->paginate(3)->setpath(''); // => Xem lại code
         // echo '<pre>';
         // print_r($roles);
         // echo '</pre>';
-       return view('backend.main.staffs.roles.index',compact('roles'));
+       return view('backend.main.staffs.roles.index',compact('roles','result'));
     }
 
 }

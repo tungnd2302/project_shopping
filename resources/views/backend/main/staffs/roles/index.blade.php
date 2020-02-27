@@ -16,10 +16,10 @@
          <h4>Tìm kiếm</h4>
         </div>
         <div class="panel-body">
-            <form action="{{ route('backend.role.search') }}" method="post">
+            <form action="{{ route('backend.role.search') }}" method="get">
               @csrf
                 <div class="col-md-10">
-                  <input type="text" name="name" class="custom-form-control" placeholder="Nhập chức vụ cần tìm kiếm">
+                  <input type="text" name="name" class="custom-form-control" placeholder="Nhập chức vụ cần tìm kiếm" value="{{ (isset($result)) ? $result : ''}}">
                 </div>
                 <div class="col-md-2">
                    <button type="submit" class="btn btn-primary custom-button" style="width: 100%; font-size: 18px">
@@ -52,7 +52,7 @@
                     {{ ($role->status == 1) ? 'Đang hoạt động' : 'Không hoạt động'}}
                   </td>
                   <td>
-                     <a href="{{ url('/user/roles/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
+                     <a href="{{ url('/user/roles/edit/'.$role->id) }}" class="btn btn-primary" style="margin-left: 5px;">
                        <span style="margin-right: 3px">Sửa</span>
                       <span class="fa fa-pencil"></span>
                     </a>
