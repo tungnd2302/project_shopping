@@ -103,6 +103,7 @@
 		Route::get('/edit/{id}','UsersController@edit')->name('backend.user.edit');
 		Route::get('/overview','UsersController@overview')->name('backend.user.overview');
 		Route::get('/show/{id}','UsersController@show')->name('backend.user.show');
+		Route::post('/store','UsersController@store')->name('backend.user.store');
 	});
 
 	Auth::routes();

@@ -129,7 +129,7 @@ class RolesController extends Controller
     {   
         $result  = $request->name;
         $roles = role::where('name','like',"%$request->name%")
-                 ->paginate(3);
+                 ->paginate(5);
          $roles->appends(['name' => $request->name]);
 
         // echo '<pre>';

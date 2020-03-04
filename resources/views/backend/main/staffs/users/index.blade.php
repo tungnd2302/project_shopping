@@ -158,7 +158,7 @@
         </div>
       </div> 
     </section>
-    
+     @include('sweetalert::alert')
     <!-- /.content -->
   </div>
 @endsection

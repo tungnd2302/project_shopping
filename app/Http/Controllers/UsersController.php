@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Role as Roles;
+use App\Models\User_info as User_info;
+use App\User as Users;
+use App\Http\Requests\StoreUsersRequest;
+use Alert;
 
 class UsersController extends Controller
 {   
@@ -16,6 +21,11 @@ class UsersController extends Controller
      */
     public function index()
     {
+        $users = Users::paginate(10);
+           echo '<pre>';
+        print_r($users);
+        echo '</pre>';
+        die;
         return view('backend.main.staffs.users.index');
     }
 
@@ -26,7 +36,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-       return view('backend.main.staffs.users.create');
+        $roles  =  Roles::where('status', 1)
+               ->get();
+     
+       return view('backend.main.staffs.users.create',compact('roles'));
     }
 
     /**
@@ -35,9 +48,33 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUsersRequest $request)
     {
-        //
+        //   echo '<pre>';
+        // print_r($request->all());
+        // echo '</pre>';
+        // die;
+
+        $user = new Users();
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->password = bcrypt($request->email); 
+        $saveUser = $user->save();
+
+        $user_info = new User_info(); 
+        $user_info->fullname = $request->fullname;
+        $user_info->phone = $request->phone;
+        $user_info->role_id = $request->roleid;
+        $user_info->address = $request->address;
+        $user_info->sex = $request->sex;
+        $user_info->birthday = $request->birthday;
+        $user_info->status = $request->status;
+        $user_info->user_id = $user->id;
+        $saveUserInfo = $user_info->save();
+        if($saveUserInfo){
+            alert()->success('Thêm nhân viên thành công', 'Successfully');
+            return redirect()->route('backend.user.index');
+        }
     }
 
     /**
