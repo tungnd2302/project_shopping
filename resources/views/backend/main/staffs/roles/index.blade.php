@@ -46,10 +46,6 @@
             @foreach($roles as $key => $role)
             @php 
               $page = $roles->currentPage();
-              if(count($roles) ==  0) {
-                $previousPage = $page - 1;  
-                return redirect('/user/roles?page='.$previousPage);
-              }
             @endphp
                 <tr>
                   <td>{{ $roles->firstItem() + $key }}</td>
