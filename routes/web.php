@@ -37,13 +37,15 @@
 	Route::prefix('/products')->group(function () {
 	    Route::get('/','ProductsController@index')->name('backend.product.index');
 		Route::get('/create','ProductsController@create')->name('backend.product.create');
-		Route::post('/store', 'ProductController@store')->name('backend.product.store');
+		Route::post('/store', 'ProductsController@store')->name('backend.product.store');
+		Route::post('/imageupload', 'ProductsController@fileUpload')->name('backend.product.imageupload');
+		Route::get('/imagedelete', 'ProductsController@removeUpload')->name('backend.product.imagedelete');
 		Route::get('/edit/{id}','ProductsController@edit')->name('backend.product.edit');
-		Route::put('/update/{id}', 'ProductController@update')->name('backend.product.update');
+		Route::put('/update/{id}', 'ProductsController@update')->name('backend.product.update');
 		Route::get('/overview','ProductsController@overview')->name('backend.product.overview');
 		Route::get('/show/{id}','ProductsController@show')->name('backend.product.show');
 		Route::get('/addmore/{id}','ProductsController@addmore')->name('backend.product.addmore');
-		Route::delete('/destroy/{id}', 'ProductController@destroy')->name('backend.product.destroy');
+		Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('backend.product.destroy');
 	});
 
 	Route::prefix('/providers')->group(function () {

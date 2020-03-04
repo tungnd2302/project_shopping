@@ -16,26 +16,39 @@
           <h4>Thêm mới</h4>
         </div>
         <div class="panel-body">
-          <form action="#" method="post" id="create_form">
-            @csrf
+          <form role="form" action="{{ route('backend.product.store') }}" id="my-form" method="post" enctype="multipart/form-data">
+             @csrf
+             {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
                 <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Tên sản phẩm</span>
                   </div>
-                  <input type="text" name="txtTenSanPham" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên sản phẩm">
+                  <input type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên sản phẩm" name="name" value="{{ old('name') }}">
                 </div>
                 <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Loại sản phẩm</span>
                   </div>
-                  <select class="custom-form-control" style="margin-top: 10px">
-                    <option value="">-- Chọn loại sản phẩm --</option>
-                    <option value="">Quần áo</option>
-                    <option value="">Giày dép</option>
-                    <option value="">Mỹ phẩm</option>
+                  <select name="category_id" value="{{ old('category_id') }}" class="custom-form-control" style="margin-top: 10px">
+                    <option>-- Chọn loại sản phẩm --</option>
+                    @foreach($categories as $category)
+                      <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
                   </select>
                 </div>
-                <div class="col-md-12" style="margin-top: 20px">
+                <div class="col-md-6" style="margin-top: 20px">
+                  <div>
+                    <span style="font-size: 20px">Giá nhập</span>
+                  </div>
+                  <input name="origin_price" value="{{ old('origin_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá ban đầu">
+                </div>
+                <div class="col-md-6" style="margin-top: 20px">
+                  <div>
+                    <span style="font-size: 20px">Giá bán ra</span>
+                  </div>
+                  <input name="sale_price" value="{{ old('sale_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá bán ra">
+                </div>
+                {{-- <div class="col-md-6" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Chọn nhà cung cấp</span>
                   </div>
@@ -45,34 +58,40 @@
                     <option value="">Công ty B</option>
                     <option value="">Công ty C</option>
                   </select>
-                </div>
+                </div> --}}
                 <div class="col-md-6" style="margin-top: 20px">
                   <div>
-                    <span style="font-size: 20px">Giá bán ra</span>
+                    <span style="font-size: 20px">Chọn nhà cung cấp</span>
                   </div>
-                  <input type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá bán ra">
+                  <input type="text" name="supplier" style="margin-top: 10px" class="custom-form-control" placeholder="Nhà cung cấp">
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Số lượng nhập</span>
                   </div>
-                  <input type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập số lượng nhập vào">
+                  <input name="quantity" value="{{ old('quantity') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập số lượng nhập vào">
                 </div>
                 <div class="col-md-12" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Trạng thái</span>
                   </div>
-                  <select class="custom-form-control" style="margin-top: 10px">
-                    <option value="">-- Chọn loại sản phẩm --</option>
-                    <option value="">Đang bán</option>
-                    <option value="">Ngừng bán</option>
+                  <select name="status" value="{{ old('status') }}" class="custom-form-control" style="margin-top: 10px">
+                    <option>-- Chọn loại sản phẩm --</option>
+                    <option value="0">Còn hàng</option>
+                    <option value="1">Hết hàng</option>
                   </select>
                 </div>
-                <div class="col-md-12"style="margin-top: 20px">
+                <div class="col-md-12" style="margin-top: 20px">
                    <div>
                     <span style="font-size: 20px">Mô tả sản phẩm</span>
                   </div>
-                  <textarea name="" id="editor1"></textarea>
+                  <textarea name="description" id="editor1">{{ old('description') }}</textarea>
+                </div>
+                <div class="col-md-12" style="margin-top: 20px">
+                  <span style="font-size: 20px">Images</span>
+                  <br>
+                  <input type="text" autocomplete="OFF" name="images" id="item_images" placeholder="" class="custom-form-control input-sm" required />
+                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fa fa-image"></i> Upload Images</button>
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
                    <button type="submit" class="btn btn-primary custom-button" style="width: 100%">
@@ -90,9 +109,92 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <!-- MODAL START -->
+  <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Upload Images</h4>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('backend.product.imageupload') }}" class="dropzone" id="dropzone" method="post" enctype="multipart/form-data">
+              {!! csrf_field() !!}
+             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+  </div>
+<!-- MODAL END -->
+
   <script src="{{ asset('ckeditor/ckeditor/ckeditor.js') }}"></script>
   <script src="{{ asset('js/validation.js') }}"></script>
   <script type="text/javascript">
+ 
+    $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      Dropzone.autoDiscover = false;
+      var acceptedFileTypes = "image/*"; //dropzone requires this param be a comma separated list
+      // imageDataArray variable to set value in crud form
+      var imageDataArray = new Array;
+      // fileList variable to store current files index and name
+      var fileList = new Array;
+      var i = 0;
+      $(function(){
+          uploader = new Dropzone(".dropzone",{
+              url: "{{url('products/imageupload')}}",
+              paramName : "file",
+              uploadMultiple :false,
+              acceptedFiles : "image/*,video/*,audio/*",
+              addRemoveLinks: true,
+              forceFallback: false,
+              maxFilesize: 256, // Set the maximum file size to 256 MB
+              parallelUploads: 100,
+          });//end drop zone
+          uploader.on("success", function(file,response) {
+              imageDataArray.push(response)
+              fileList[i] = {
+                  "serverFileName": response,
+                  "fileName": file.name,
+                  "fileId": i
+              };
+         
+              i += 1;
+              $('#item_images').val(imageDataArray);
+          });
+          uploader.on("removedfile", function(file) {
+              var rmvFile = "";
+              for (var f = 0; f < fileList.length; f++) {
+                  if (fileList[f].fileName == file.name) {
+                      // remove file from original array by database image name
+                      imageDataArray.splice(imageDataArray.indexOf(fileList[f].serverFileName), 1);
+                      $('#item_images').val(imageDataArray);
+                      // get removed database file name
+                      rmvFile = fileList[f].serverFileName;
+                      // get request to remove the uploaded file from server
+                      $.get( "{{url('products/imagedelete')}}", { file: rmvFile } )
+                        .done(function( data ) {
+                          //console.log(data)
+                        });
+                      // reset imageDataArray variable to set value in crud form
+                      
+                      console.log(imageDataArray)
+                  }
+              }
+              
+          });
+      });
+
     $(document).ready(function(e){
       $('#create_form').bootstrapValidator({
         feedbackIcons:{
@@ -130,4 +232,10 @@
   <script>
      CKEDITOR.replace('editor1');
   </script>
+  <style>
+      .dropzone {
+          border-radius: 5px;
+          background: white;
+      }
+    </style>
 @endsection

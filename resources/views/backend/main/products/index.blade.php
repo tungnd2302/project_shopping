@@ -58,119 +58,35 @@
               <th width="20%">Trạng thái</th>
               <th>Thao tác</th>
             </tr>
-             <tr>
-              <td>1</td>
-              <td>Kem chống nắng</td>
-              <td>Phụ kiện</td>
-              <td>100.000đ</td>
-              <td>Đang mở bán</td>
-              <td>
-                <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/products/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>2</td>
-              <td>Kem chống nắng</td>
-              <td>Phụ kiện</td>
-              <td>100.000đ</td>
-              <td>Đang mở bán</td>
-              <td>
-                <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/products/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td>Kem chống nắng</td>
-              <td>Phụ kiện</td>
-              <td>100.000đ</td>
-              <td>Đang mở bán</td>
-              <td>
-                <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/products/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-              <td>Kem chống nắng</td>
-              <td>Phụ kiện</td>
-              <td>100.000đ</td>
-              <td>Đang mở bán</td>
-              <td>
-                <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/products/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>5</td>
-              <td>Kem chống nắng</td>
-              <td>Phụ kiện</td>
-              <td>100.000đ</td>
-              <td>Đang mở bán</td>
-              <td>
-                <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/products/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-          
-           
-              
+            @foreach($products as $key => $product)
+               <tr>
+                <td>{{ $products->firstItem() + $key }}</td>
+                <td>{{ $product->name }}</td>
+                <td>{{ $product->category->name }}</td>
+                <td>{{ number_format($product->sale_price) }} VNĐ</td>
+                @if($product->status == 0)
+                  <td>Còn hàng</td>
+                @else
+                  <td>Hết hàng</td>
+                @endif
+                <td>
+                  <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
+                     <span style="margin-right: 3px">Xem</span>
+                    <span class="fa fa-eye"></span>
+                  </a>
+                   <a href="{{ url('/products/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
+                     <span style="margin-right: 3px">Sửa</span>
+                    <span class="fa fa-pencil"></span>
+                  </a>
+                   <a href="" class="btn btn-danger">
+                    <span style="margin-right: 3px">Xóa</span>
+                    <span class="fa fa-trash"></span>
+                  </a>
+                </td>
+              </tr> 
+            @endforeach
           </table>
+          {{ $products->render() }}
           <ul class="pagination pagination">
   <li class="active"><a href="#">1</a></li>
   <li><a href="#">2</a></li>
@@ -181,7 +97,7 @@
         </div>
       </div> 
     </section>
-    
+    @include('sweetalert::alert')
     <!-- /.content -->
   </div>
 @endsection
