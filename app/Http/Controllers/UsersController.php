@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Role as Roles;
-use App\Models\User_info as User_info;
+use App\Models\User_info as userInfo;
 use App\User as Users;
 use App\Http\Requests\StoreUsersRequest;
 use Alert;
@@ -21,12 +21,16 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = Users::paginate(10);
-           echo '<pre>';
-        print_r($users);
-        echo '</pre>';
-        die;
-        return view('backend.main.staffs.users.index');
+        $users = Users::with(['userInfo','roles'])
+                ->paginate(10);
+        // foreach ($users as $value) {
+        //     $value['name_role'] = $value->roles->;
+        // }
+        //    echo '<pre>';
+        // print_r($users);
+        // echo '</pre>';
+        // die;
+        return view('backend.main.staffs.users.index',compact('users'));
     }
 
     /**
@@ -37,7 +41,7 @@ class UsersController extends Controller
     public function create()
     {
         $roles  =  Roles::where('status', 1)
-               ->get();
+                    ->get();
      
        return view('backend.main.staffs.users.create',compact('roles'));
     }

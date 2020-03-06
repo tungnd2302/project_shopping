@@ -14,4 +14,8 @@ class User_info extends Model
     {
     	return $this->belongsto(User::class);
     }
+
+    // protected function role(){
+    //     return $this->hasOne(Role::class);
+    // }
 }

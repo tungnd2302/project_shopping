@@ -60,10 +60,11 @@
               <th width="13%">Số điện thoại</th>
               <th>Thao tác</th>
             </tr>
+            @foreach($users as $key => $user )
             <tr>
-              <td>1</td>
-              <td>Nguyễn Đức Tùng</td>
-              <td>Administrator</td>
+              <td>{{ $users->firstItem() + $key }}</td>
+              <td>{{ $user->fullname}}</td>
+              <td>{{ $user->name}}</td>
               <td>tungnd0318@gmail.com</td>
               <td>096 663 7498</td>
               <td>
@@ -81,80 +82,11 @@
                 </a>
               </td>
             </tr>      
+            @endforeach
 
-            <tr>
-              <td>2</td>
-              <td>Nguyễn Đức Tùng</td>
-              <td>Administrator</td>
-              <td>tungnd0318@gmail.com</td>
-              <td>096 663 7498</td>
-              <td>
-                <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/users/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Đặt lại mật khẩu</span>
-                  <span class="fa fa-undo"></span>
-                </a>
-              </td>
-            </tr>  
-
-            <tr>
-              <td>3</td>
-              <td>Nguyễn Đức Tùng</td>
-              <td>Administrator</td>
-              <td>tungnd0318@gmail.com</td>
-              <td>096 663 7498</td>
-              <td>
-                <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/users/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Đặt lại mật khẩu</span>
-                  <span class="fa fa-undo"></span>
-                </a>
-              </td>
-            </tr>       
-
-            <tr>
-              <td>4</td>
-              <td>Nguyễn Đức Tùng</td>
-              <td>Administrator</td>
-              <td>tungnd0318@gmail.com</td>
-              <td>096 663 7498</td>
-              <td>
-                <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/users/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Đặt lại mật khẩu</span>
-                  <span class="fa fa-undo"></span>
-                </a>
-              </td>
-            </tr>  
+         
           </table>
-          <ul class="pagination pagination">
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-</ul>
+          {{ $users->render() }}
         </div>
       </div> 
     </section>
