@@ -63,8 +63,8 @@
             @foreach($users as $key => $user )
             <tr>
               <td>{{ $users->firstItem() + $key }}</td>
-              <td>{{ $user->fullname}}</td>
-              <td>{{ $user->name}}</td>
+              <td>{{ $user->fullname }}</td>
+              <td>{{ $user->name }}</td>
               <td>tungnd0318@gmail.com</td>
               <td>096 663 7498</td>
               <td>

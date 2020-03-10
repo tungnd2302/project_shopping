@@ -23,6 +23,7 @@ class UsersController extends Controller
     {
         $users = Users::with(['userInfo','roles'])
                 ->paginate(10);
+        // $user = Users::find(7)->userInfo()->roles()->get();
         // foreach ($users as $value) {
         //     $value['name_role'] = $value->roles->;
         // }
@@ -65,7 +66,7 @@ class UsersController extends Controller
         $user->password = bcrypt($request->email); 
         $saveUser = $user->save();
 
-        $user_info = new User_info(); 
+        $user_info = new userInfo(); 
         $user_info->fullname = $request->fullname;
         $user_info->phone = $request->phone;
         $user_info->role_id = $request->roleid;
