@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Requests\StoreProductsRequest;
 class ProductsController extends Controller
 {   
     public function overview(){
@@ -20,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(5);
+        $products = Product::paginate(3);
         return view('backend.main.products.index')->with([
             'products' => $products
         ]);
@@ -45,33 +45,41 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductsRequest $request)
     {
-        dd($request);
-        $product = new Product();
-        $product->name = $request->get('name');
-        $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
-        $product->category_id = $request->get('category_id');
-        $product->origin_price = $request->get('origin_price');
-        $product->sale_price = $request->get('sale_price');
-        $product->quantity = $request->get('quantity');
-        $product->status = $request->get('status');
-        $product->description = $request->get('description');
-        $product->supplier = $request->get('supplier');
-        $product->user_id = Auth::user()->id;
-        $save = $product->save();
 
-        $image = new Image();
-        $image->name = $filename['name'];
-        $image->path = $uploadPath['url'];
-        $image->product_id= $product->id;
-        $image->save();
+        echo "<pre>";
+        print_f($request->all());
+        die;
+        // $product = new Product();
+        // $product->name = $request->get('name');
+        // $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        // $product->category_id = $request->get('category_id');
+        // $product->origin_price = $request->get('origin_price');
+        // $product->sale_price = $request->get('sale_price');
+        // $product->quantity = $request->get('quantity');
+        // $product->status = $request->get('status');
+        // $product->description = $request->get('description');
+        // $product->supplier = $request->get('supplier');
+        // $product->user_id = Auth::user()->id;
+        // $save = $product->save();
 
+        // $_IMAGE = $request->file('file');//nhận yêu cầu
+        // $filename = $_IMAGE->getClientOriginalName();//thời gian + tên gốc của ảnh
+        // $uploadPath = 'storage/products/';//file lưu ảnh
+        // Storage::disk('public')->putFileAs('products', $_IMAGE , $filename);
+        // $image = new Image();
+        // $image->name = $filename;
+        // $image->path = $uploadPath;
+        // $image->product_id= $product->id;
+        // $image->save();
+        // return response()->json(['success'=>$filename]);
         alert()->success('Thêm sản phẩm thành công', 'Successfully');
         
         return redirect()->route('backend.product.index');
     }
 
+    //lưu ảnh vào file
     public function fileUpload(Request $request)
     {
         $_IMAGE = $request->file('file');//nhận yêu cầu
@@ -82,6 +90,7 @@ class ProductsController extends Controller
         echo json_encode($filename);//in ra chuỗi gán vào ô input
     }
 
+    //xóa ảnh khỏi file
     public function removeUpload(Request $request)
     {  
        
@@ -114,7 +123,10 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        return view('backend.main.products.show');
+        $product = Product::find($id);
+        return view('backend.main.products.show')->with([
+            'product' => $product
+        ]);
     }
 
     /**

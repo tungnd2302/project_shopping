@@ -4,10 +4,10 @@
 	<title>Login</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="../backend/auth/carowsel/owl.carousel.min.css">
-	<link rel="stylesheet" type="text/css" href="../backend/auth/carowsel/owl.theme.default.min.css">
-	<link rel="stylesheet" type="text/css" href="../backend/auth/css/docs.theme.min.css">
-	<link rel="stylesheet" type="text/css" href="../backend/auth/css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('backend/auth/carowsel/owl.carousel.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('backend/auth/carowsel/owl.theme.default.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('backend/auth/css/docs.theme.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('backend/auth/css/main.css') }}">
 </head>
 <body>
 	<div class="body1" style="background: linear-gradient(to bottom, #FFB88C, #DE6262);background-repeat: no-repeat;width: 100%;">
@@ -44,21 +44,21 @@
 	            <div class="col-md-7 img" style="padding-right: 0px;padding-left: 0px;">
 	                <div class="carousel-inner img1 fadeOut owl-carousel owl-theme">
 	                  <div class="carousel-item active">
-	                    <img class="d-block w-100" src="../backend/auth/images/imgAdmin.jpg" alt="First slide">
+	                    <img class="d-block w-100" src="{{ asset('backend/auth/images/imgAdmin.jpg') }}" alt="First slide">
 	                  </div>
 	                  <div class="carousel-item">
-	                    <img class="d-block w-100" src="../backend/auth/images/imgAdmin1.jpg" alt="Second slide">
+	                    <img class="d-block w-100" src="{{ asset('backend/auth/images/imgAdmin1.jpg') }}" alt="Second slide">
 	                  </div>
 	                  <div class="carousel-item">
-	                    <img class="d-block w-100" src="../backend/auth/images/imgAdmin2.png" alt="Third slide">
+	                    <img class="d-block w-100" src="{{ asset('backend/auth/images/imgAdmin2.png') }}" alt="Third slide">
 	                  </div>
 	                </div>
 	            </div>
 	        </div>
 	    </div>
 	 </div>
-	<script type="text/javascript" src="../backend/auth/js/jquery.min.js"></script>
-	<script type="text/javascript" src="../backend/auth/carowsel/owl.carousel.js"></script>
+	<script type="text/javascript" src="{{ asset('backend/auth/js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('backend/auth/carowsel/owl.carousel.js') }}"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script>
       jQuery(document).ready(function($) {

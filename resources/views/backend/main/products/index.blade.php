@@ -70,7 +70,7 @@
                   <td>Hết hàng</td>
                 @endif
                 <td>
-                  <a href="{{ url('/products/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
+                  <a href="{{ route('backend.product.show',$product->id) }}" class="btn btn-warning" style="margin-left: 5px;">
                      <span style="margin-right: 3px">Xem</span>
                     <span class="fa fa-eye"></span>
                   </a>
@@ -87,13 +87,6 @@
             @endforeach
           </table>
           {{ $products->render() }}
-          <ul class="pagination pagination">
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-</ul>
         </div>
       </div> 
     </section>
