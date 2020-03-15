@@ -10,7 +10,7 @@ class Role extends Model
 {
 	protected $table = 'roles';
 
-    protected function users(){
+    public function users(){
         return $this->belongsToMany(User::class,'user_info','role_id','user_id');
     }
 }

@@ -10,7 +10,7 @@ class User_info extends Model
 {
     protected $table = 'user_info';
 
-    protected function user()
+    public function user()
     {
     	return $this->belongsto(User::class);
     }

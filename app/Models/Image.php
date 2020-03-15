@@ -9,7 +9,7 @@ class Image extends Model
 {
     protected $table = 'images';
 
-    protected function product()
+    public function product()
     {
     	return $this->belongsto(Product::class);
     }

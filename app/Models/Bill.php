@@ -8,7 +8,7 @@ class Bill extends Model
 {
     protected $table = 'bills';
 
-    protected function bill_detail(){
+    public function bill_detail(){
     	return $this->hasMany(Bill_detail::class);
     }
 }

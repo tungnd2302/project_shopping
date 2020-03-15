@@ -45,7 +45,7 @@
 		Route::get('/overview','ProductsController@overview')->name('backend.product.overview');
 		Route::get('/show/{id}','ProductsController@show')->name('backend.product.show');
 		Route::get('/addmore/{id}','ProductsController@addmore')->name('backend.product.addmore');
-		Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('backend.product.destroy');
+		Route::get('/destroy/{id}', 'ProductsController@destroy')->name('backend.product.destroy');
 	});
 
 	Route::prefix('/providers')->group(function () {

@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductsRequest;
+use Alert;
+use JsValidator;
+
 class ProductsController extends Controller
 {   
     public function overview(){
@@ -45,35 +49,26 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductsRequest $request)
+    public function store(Request $request)
     {
+        // dd($request);
+        $product = new Product();
+        $product->name = $request->get('name');
+        $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $product->category_id = $request->get('category_id');
+        $product->origin_price = $request->get('origin_price');
+        $product->sale_price = $request->get('sale_price');
+        $product->quantity = $request->get('quantity');
+        $product->status = $request->get('status');
+        $product->description = $request->get('description');
+        $product->supplier = $request->get('supplier');
+        $product->user_id = Auth::user()->id;
+        $save = $product->save();
 
-        echo "<pre>";
-        print_f($request->all());
-        die;
-        // $product = new Product();
-        // $product->name = $request->get('name');
-        // $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
-        // $product->category_id = $request->get('category_id');
-        // $product->origin_price = $request->get('origin_price');
-        // $product->sale_price = $request->get('sale_price');
-        // $product->quantity = $request->get('quantity');
-        // $product->status = $request->get('status');
-        // $product->description = $request->get('description');
-        // $product->supplier = $request->get('supplier');
-        // $product->user_id = Auth::user()->id;
-        // $save = $product->save();
-
-        // $_IMAGE = $request->file('file');//nhận yêu cầu
-        // $filename = $_IMAGE->getClientOriginalName();//thời gian + tên gốc của ảnh
-        // $uploadPath = 'storage/products/';//file lưu ảnh
-        // Storage::disk('public')->putFileAs('products', $_IMAGE , $filename);
-        // $image = new Image();
-        // $image->name = $filename;
-        // $image->path = $uploadPath;
-        // $image->product_id= $product->id;
-        // $image->save();
-        // return response()->json(['success'=>$filename]);
+        $image = new Image();
+        $image->path = $request->get('images');
+        $image->product_id= $product->id;
+        $image->save();
         alert()->success('Thêm sản phẩm thành công', 'Successfully');
         
         return redirect()->route('backend.product.index');
@@ -83,11 +78,11 @@ class ProductsController extends Controller
     public function fileUpload(Request $request)
     {
         $_IMAGE = $request->file('file');//nhận yêu cầu
-        $filename = time().$_IMAGE->getClientOriginalName();//thời gian + tên gốc của ảnh
-        $uploadPath = 'storage/products/';//file lưu ảnh
-        Storage::disk('public')->putFileAs('products', $_IMAGE , $filename);
-        // $_IMAGE->move($uploadPath,$filename);//chuyển ảnh
-        echo json_encode($filename);//in ra chuỗi gán vào ô input
+            $filename = time().$_IMAGE->getClientOriginalName();//thời gian + tên gốc của ảnh
+            $uploadPath = 'storage/products/';//file lưu ảnh
+            Storage::disk('public')->putFileAs('products', $_IMAGE , $filename);
+            // $_IMAGE->move($uploadPath,$filename);//chuyển ảnh
+            echo json_encode($filename);//in ra chuỗi gán vào ô input
     }
 
     //xóa ảnh khỏi file
@@ -160,7 +155,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Product::destroy($id);
+         return redirect()->route('backend.product.index');
     }
 
     // Thêm số lượng sản phẩm

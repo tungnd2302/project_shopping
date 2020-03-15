@@ -78,7 +78,7 @@
                      <span style="margin-right: 3px">Sửa</span>
                     <span class="fa fa-pencil"></span>
                   </a>
-                   <a href="" class="btn btn-danger">
+                   <a href="{{ route('backend.product.destroy',$product->id) }}" class="btn btn-danger">
                     <span style="margin-right: 3px">Xóa</span>
                     <span class="fa fa-trash"></span>
                   </a>

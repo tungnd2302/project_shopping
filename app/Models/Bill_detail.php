@@ -10,11 +10,11 @@ class Bill_detail extends Model
 {
     protected $table = 'bill_detail';
 
-    protected function products(){
+    public function products(){
         return $this->hasMany(Product::class);
     }
 
-    protected function bill(){
+    public function bill(){
     	return $this->belongsTo(Bill::class);
     }
 }

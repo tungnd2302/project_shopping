@@ -12,21 +12,21 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected function category()
+    public function category()
     {
     	return $this->belongsto(Category::class);
     }
 
-    protected function images()
+    public function images()
     {
     	return $this->hasMany(Image::class);
     }
 
-    protected function user(){
+    public function user(){
     	return $this->belongsTo(User::class);
     }
 
-    protected function bill_detail(){
+    public function bill_detail(){
         return $this->belongsTo(Bill_detail::class);
     }
 

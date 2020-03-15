@@ -24,7 +24,7 @@
                   </div>
                   <input type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên sản phẩm" name="name">
                 </div>
-               {{--  <div class="col-md-6">
+                <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Loại sản phẩm</span>
                   </div>
@@ -46,7 +46,7 @@
                     <span style="font-size: 20px">Giá bán ra</span>
                   </div>
                   <input name="sale_price" value="{{ old('sale_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá bán ra">
-                </div> --}}
+                </div>
                 {{-- <div class="col-md-6" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Chọn nhà cung cấp</span>
@@ -58,7 +58,7 @@
                     <option value="">Công ty C</option>
                   </select>
                 </div> --}}
-                {{-- <div class="col-md-6" style="margin-top: 20px">
+                <div class="col-md-6" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Chọn nhà cung cấp</span>
                   </div>
@@ -91,7 +91,7 @@
                   <br>
                   <input type="text" autocomplete="OFF" name="images" id="item_images" placeholder="" class="custom-form-control input-sm" required />
                   <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fa fa-image"></i> Upload Images</button>
-                </div> --}}
+                </div>
                 <div class="col-md-6" style="margin-top: 20px">
                    <button type="submit" class="btn btn-primary custom-button" style="width: 100%">
                    <span class="fontsize20">Thêm mới</span>
@@ -133,9 +133,7 @@
   </div>
 <!-- MODAL END -->
 
-  <script src="{{ asset('ckeditor/ckeditor/ckeditor.js') }}"></script>
-  <script src="{{ asset('js/validation.js') }}"></script>
-  {!! JsValidator::formRequest('App\Http\Requests\StoreProductsRequest', '#my_form'); !!}
+  
   <script type="text/javascript">
  
     $.ajaxSetup({
@@ -195,40 +193,43 @@
           });
       });
 
-    $(document).ready(function(e){
-      $('#create_form').bootstrapValidator({
-        feedbackIcons:{
-          valid: 'glyphicon glyphicon-ok',
-          invalid: 'glyphicon glyphicon-remove',
-          validating:'glyphicon glyphicon-refresh' 
-        },
-        fields:{
-          txtTenSanPham:{
-            validators:{
-              notEmpty:{
-                message: 'Vui lòng nhập vào tài khoản'
-              },
-              stringLength:{
-                min: 5,
-                message: 'Nhập đúng định dạng tài khoản'
-              }
-            }
-          },
-          // txtMatkhau:{
-          //   validators:{
-          //     notEmpty:{
-          //       message: 'Vui lòng nhập mật khẩu'
-          //     },
-          //     stringLength:{
-          //       min:5,
-          //       message: 'Nhập đúng định dạng mật khẩu'
-          //     }
-          //   }
-          // }
-        }
-      })
-    })
+    // $(document).ready(function(e){
+    //   $('#create_form').bootstrapValidator({
+    //     feedbackIcons:{
+    //       valid: 'glyphicon glyphicon-ok',
+    //       invalid: 'glyphicon glyphicon-remove',
+    //       validating:'glyphicon glyphicon-refresh' 
+    //     },
+    //     fields:{
+    //       txtTenSanPham:{
+    //         validators:{
+    //           notEmpty:{
+    //             message: 'Vui lòng nhập vào tài khoản'
+    //           },
+    //           stringLength:{
+    //             min: 5,
+    //             message: 'Nhập đúng định dạng tài khoản'
+    //           }
+    //         }
+    //       },
+    //       // txtMatkhau:{
+    //       //   validators:{
+    //       //     notEmpty:{
+    //       //       message: 'Vui lòng nhập mật khẩu'
+    //       //     },
+    //       //     stringLength:{
+    //       //       min:5,
+    //       //       message: 'Nhập đúng định dạng mật khẩu'
+    //       //     }
+    //       //   }
+    //       // }
+    //     }
+    //   })
+    // })
   </script>
+  <script src="{{ asset('ckeditor/ckeditor/ckeditor.js') }}"></script>
+  <script src="{{ asset('js/validation.js') }}"></script>
+  {!! JsValidator::formRequest('App\Http\Requests\StoreProductsRequest', '#my_form'); !!}
   <script>
      CKEDITOR.replace('editor1');
   </script>
