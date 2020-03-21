@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditDescriptionRoles extends Migration
+class CreateDescripionOnRoles extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class EditDescriptionRoles extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->string('description',250)->nullable()->change();
+            $table->text('description')->nullable()->after('name');
         });
     }
 

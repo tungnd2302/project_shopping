@@ -16,29 +16,21 @@
          <h4>Tìm kiếm</h4>
         </div>
         <div class="panel-body">
-            <form action="#" method="post">
-                <div class="col-md-6">
-                  <input type="" name="" class="custom-form-control" placeholder="Nhập tên người dùng">
-                </div>
-                <div class="col-md-6" >
-                   <select class="custom-form-control">
-                     <option value="">-- Chọn chức vụ -- </option>
-                     <option value="">Nhân viên kinh doanh</option>
-                     <option value="">Nhân viên nhân sự</option>
-                   </select>
-                </div>
+            <form action="{{ route('backend.user.search')}}" method="get">
+              @csrf
                 <div class="col-md-5" style="margin-top: 20px">
-                  <input type="" name="" class="custom-form-control" placeholder="Nhập email người dùng">
+                <input type="text" name="email" class="custom-form-control" placeholder="Nhập email người dùng" value="{{ isset($email) ? $email : ''  }}">
                 </div>
                 <div class="col-md-4" style="margin-top: 20px">
-                   <select class="custom-form-control">
-                     <option value="">-- Chọn trạng thái -- </option>
-                     <option value="">Hoạt động</option>
-                     <option value="">Không hoạt động</option>
-                   </select>
+                  <select class="custom-form-control" name="roleid">
+                    <option value="-1">Tất cả chức vụ</option>
+                     @foreach($roles as $role) 
+                        <option value="{{ $role->id }}" {{ (isset($roleid) && ($role->id == $roleid)) ? "selected='true'" : '' }}>{{ $role->name }}</option>
+                     @endforeach
+                  </select>
                 </div>
                 <div class="col-md-3"  style="margin-top: 20px">
-                   <button type="button" class="btn btn-primary custom-button" style="width: 100%; font-size: 18px" >
+                   <button type="submit" class="btn btn-primary custom-button" style="width: 100%; font-size: 18px" >
                     <span class="fa fa-search"></span>
                     Tìm kiếm
                   </button>
@@ -55,34 +47,59 @@
             <tr>
               <th width="3%">#</th>
               <th width="15%" >Họ tên</th>
-              <th width="15%" >Chức vụ</th>
+              <th width="20%" >Chức vụ</th>
               <th width="15%" >Email</th>
               <th width="13%">Số điện thoại</th>
+              <th width="15%">Trạng thái</th>
               <th>Thao tác</th>
             </tr>
-            @foreach($users as $key => $user )
-            <tr>
-              <td>{{ $users->firstItem() + $key }}</td>
-              <td>{{ $user->fullname }}</td>
-              <td>{{ $user->name }}</td>
-              <td>tungnd0318@gmail.com</td>
-              <td>096 663 7498</td>
-              <td>
-                <a href="{{ url('/users/show/14') }}" class="btn btn-warning" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Xem</span>
-                  <span class="fa fa-eye"></span>
-                </a>
-                 <a href="{{ url('/users/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Đặt lại mật khẩu</span>
-                  <span class="fa fa-undo"></span>
-                </a>
-              </td>
-            </tr>      
-            @endforeach
+            @if(count($users) > 0)
+              @foreach($users as $key => $user )
+              <tr>
+                <td>{{ $users->firstItem() + $key }}</td>
+                <td>{{ (isset($user->userInfo->fullname) ? $user->userInfo->fullname : $user->fullname) }}</td>
+                @if((isset($user->roles[0]->name) && $user->roles[0]->status != 0) || (isset($user->name) && $user->rolestatus != 0))
+                <td>{{ (isset($user->roles[0]->name) ? $user->roles[0]->name : $user->name)  }}</td>
+                @else
+                <td>Không xác định</td>
+                @endif
+                <td>{{ $user->email }}</td>
+                @php 
+                   $data = isset($user->userInfo->phone) ? $user->userInfo->phone : $user->phone;
+                   $phone = sprintf("%s-%s-%s",
+                                                substr($data, 0, 4),
+                                                substr($data, 4, 3),
+                                                substr($data, 7, 3));
+                  echo "<td> $phone </td>";
+                @endphp
+                @if(isset($user->userInfo->status))
+                <td>
+                  {{ $user->userInfo->status == 0 ? 'Không hoạt động' : 'Hoạt động' }}
+                </td>
+                @else
+                <td>
+                  {{ $user->userstatus == 0 ? 'Không hoạt động' : 'Hoạt động' }}
+                </td>
+                @endif
+                <td>
+                  <a href="{{ url('/users/show/'.$user->id) }}" class="btn btn-warning" style="margin-left: 5px;">
+                    <span style="margin-right: 3px">Xem</span>
+                    <span class="fa fa-eye"></span>
+                  </a>
+                  <a href="{{ url('/users/edit/'.$user->id ) }}" class="btn btn-primary" style="margin-left: 5px;">
+                    <span style="margin-right: 3px">Sửa</span>
+                    <span class="fa fa-pencil"></span>
+                  </a>
+                </td>
+              </tr>      
+              @endforeach
+            @else
+             <tr>
+               <th colspan="6">
+                <h5>Không tồn tại người dùng</h5>
+               </th>
+             </tr>
+            @endif
 
          
           </table>

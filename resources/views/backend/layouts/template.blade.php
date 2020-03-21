@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="{{ asset('css/skins/_all-skins.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
   <link rel="stylesheet" href="{{ asset('css/dropzone.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
   {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet"> --}}
   {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css"> --}}
@@ -27,6 +28,7 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
 <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script> --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
@@ -85,5 +87,13 @@
 <script src="{{ asset('js/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/demo.js') }}"></script>
+<!-- DATE PICKER -->
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+<script type="text/javascript">
+  $('#datepicker').datepicker({
+        autoclose: true,
+        format: 'yyyy-mm-dd'
+      })
+  </script>  
 </body>
 </html>
