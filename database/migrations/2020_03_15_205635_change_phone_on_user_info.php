@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDescriptionToRole extends Migration
+class ChangePhoneOnUserInfo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddDescriptionToRole extends Migration
      */
     public function up()
     {
-        Schema::table('roles', function (Blueprint $table) {
-            $table->text('description')->after('name');
+        Schema::table('user_info', function (Blueprint $table) {
+            $table->string('phone', 50)->change();
         });
     }
 
@@ -25,8 +25,8 @@ class AddDescriptionToRole extends Migration
      */
     public function down()
     {
-        Schema::table('roles', function (Blueprint $table) {
-             $table->DropColumn(['description']);
+        Schema::table('user_info', function (Blueprint $table) {
+            $table->DropColumn(['phone']);
         });
     }
 }

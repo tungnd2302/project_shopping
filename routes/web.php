@@ -106,7 +106,13 @@
 		Route::get('/overview','UsersController@overview')->name('backend.user.overview');
 		Route::get('/show/{id}','UsersController@show')->name('backend.user.show');
 		Route::post('/store','UsersController@store')->name('backend.user.store');
+		Route::get('/search','UsersController@search')->name('backend.user.search');
+		Route::post('/update','UsersController@update')->name('backend.user.update');
+		Route::post('/changepassword','UsersController@changepassword')->name('backend.user.changepassword');
+		Route::get('/changestatus/{id}','UsersController@changestatus')->name('backend.user.changestatus');
 	});
+
+
 
 	Auth::routes();
 

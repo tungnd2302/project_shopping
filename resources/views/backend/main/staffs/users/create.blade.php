@@ -19,6 +19,7 @@
                     <div class="panel-body">
                         <form action="{{ route('backend.user.store') }}" method="post" id="my_form">
                             @csrf
+                            
                             <div class="col-md-6">
                                 <div>
                                     <span style="font-size: 20px">Email người dùng</span>
@@ -93,7 +94,7 @@
                                 <div>
                                     <span style="font-size: 20px">Ngày sinh</span>
                                 </div>
-                                <input type="date" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập ngày sinh" name="birthday">
+                                <input type="text" id = "datepicker" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập ngày sinh" name="birthday">
                             </div>
                             <div class="col-md-12" style="margin-top: 20px">
                                 <div>
