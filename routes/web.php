@@ -26,12 +26,12 @@
 	Route::prefix('/categories',['middleware' => 'checkadmin'])->group(function () {
 	    Route::get('/','CategoriesController@index')->name('backend.category.index');
 		Route::get('/create','CategoriesController@create')->name('backend.category.create');
-		Route::post('/store','CategoryController@store')->name('backend.category.store');
+		Route::post('/store','CategoriesController@store')->name('backend.category.store');
 		Route::get('/edit/{id}','CategoriesController@edit')->name('backend.category.edit');
-		Route::put('/update/{id}','CategoryController@update')->name('backend.category.update');
+		Route::put('/update/{id}','CategoriesController@update')->name('backend.category.update');
 		Route::get('/overview','CategoriesController@overview')->name('backend.category.overview');
-		Route::delete('/destroy/{id}','CategoryController@destroy')->name('backend.category.destroy');
-		Route::get('/{id}','CategoryController@show')->name('backend.category.show');
+		Route::delete('/destroy/{id}','CategoriesController@destroy')->name('backend.category.destroy');
+		Route::get('/{id}','CategoriesController@show')->name('backend.category.show');
 	});
 
 	Route::prefix('/products')->group(function () {
@@ -45,7 +45,7 @@
 		Route::get('/overview','ProductsController@overview')->name('backend.product.overview');
 		Route::get('/show/{id}','ProductsController@show')->name('backend.product.show');
 		Route::get('/addmore/{id}','ProductsController@addmore')->name('backend.product.addmore');
-		Route::get('/destroy/{id}', 'ProductsController@destroy')->name('backend.product.destroy');
+		Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('backend.product.destroy');
 	});
 
 	Route::prefix('/providers')->group(function () {

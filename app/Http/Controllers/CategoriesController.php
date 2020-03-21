@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoriesController extends Controller
 {   
@@ -16,7 +17,10 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return view('backend.main.categories.index');
+        $categories = Category::paginate(3);
+        return view('backend.main.categories.index')->with([
+                'categories' => $categories
+            ]);
     }
 
     /**
@@ -26,7 +30,11 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-       return view('backend.main.categories.create');
+        $categories = Category::all();
+        // dd($categories);
+       return view('backend.main.categories.create')->with([
+            'categories' => $categories
+       ]);
     }
 
     /**
@@ -37,7 +45,14 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        $category->name = $request->get('name');
+        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $category->parent_id = $request->get('parent_id');
+        $category->depth = 0;
+        $save = $category->save();
+        alert()->success('Tạo danh mục thành công', 'Successfully');
+        return redirect()->route('backend.category.index');
     }
 
     /**
@@ -59,7 +74,12 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.main.categories.edit');
+        $categories = Category::all();
+        $categorychose = Category::find($id);
+        return view('backend.main.categories.edit')->with([
+            'categories' => $categories,
+            'categorychose' => $categorychose
+        ]);
     }
 
     /**
@@ -71,7 +91,14 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->get('name');
+        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $category->parent_id = $request->get('parent_id');
+        $category->depth = 0;
+        $save = $category->save();
+        alert()->success('Sửa danh mục thành công', 'Successfully');
+        return redirect()->route('backend.category.index');
     }
 
     /**
