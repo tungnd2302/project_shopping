@@ -7,7 +7,13 @@
           <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>{{ Illuminate\Support\Facades\Auth::user()->name }}</p>
+          <p>
+            @if( Illuminate\Support\Facades\Auth::user()->userInfo->fullname != null )
+                 {{ Illuminate\Support\Facades\Auth::user()->userInfo->fullname }} 
+                 @else
+                  {{ Illuminate\Support\Facades\Auth::user()->name }} 
+                  @endif
+          </p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
