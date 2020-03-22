@@ -14,32 +14,27 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Trang chủ</li>
+
         <li>
-          <a href="{{ url('/users/overview') }}">
-            <i class="fa fa-home"></i> <span>Tổng quan</span>
+          <a href="#">
+            <i class="fa fa-product-hunt"></i> <span>Thông tin cá nhân</span>
           </a>
         </li>
 
         <li>
-          <a href="{{ url('/user/roles') }}">
-            <i class="fa fa-product-hunt"></i> <span>Chức vụ</span>
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Chỉnh sửa</span>
           </a>
         </li>
 
         <li>
-          <a href="{{ url('/users') }}">
-            <i class="fa fa-users"></i> <span>Người dùng</span>
+          <a href="#">
+            <i class="fa fa-adjust"></i> <span>Đổi mật khẩu</span>
           </a>
         </li>
 
         <li>
-          <a href="{{ url('/authorize') }}">
-            <i class="fa fa-adjust"></i> <span>Phân quyền</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="{{ url('/') }}">
+          <a href="#">
             <i class="fa fa-arrow-circle-left"></i> <span>Quay lại</span>
           </a>
         </li>

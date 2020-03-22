@@ -73,24 +73,10 @@
                   </p>
                 </li>
                 <!-- Menu Body -->
-                <li class="user-body">
-                  <div class="row">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </div>
-                  <!-- /.row -->
-                </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{ route('backend.profile.index') }}" class="btn btn-default btn-flat">Cá nhân</a>
                   </div>
                   <div class="pull-right">
                     <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
@@ -174,7 +160,7 @@
                 <div class="custom_image_box">
                       <img src="{{ asset('images/home_icon/config.png')}}" alt="" width=100 height="100"/ >
                 </div>
-                <a href="" class="custom_title" >Tài khoản</a>
+              <a href="{{ route('backend.profile.index') }}" class="custom_title" >Tài khoản</a>
             </div>
           </div>
        </div>

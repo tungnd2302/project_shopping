@@ -112,8 +112,13 @@
 		Route::get('/changestatus/{id}','UsersController@changestatus')->name('backend.user.changestatus');
 	});
 
-
-
+	Route::prefix('/profile')->group(function () {
+		Route::get('/index','ProfileController@index')->name('backend.profile.index');
+		Route::get('/timeline','ProfileController@timeline')->name('backend.profile.timeline');
+		Route::get('/editprofile','ProfileController@editprofile')->name('backend.profile.editprofile');
+		Route::get('/changepassword','ProfileController@changepassword')->name('backend.profile.changepassword');
+	});
+	
 	Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

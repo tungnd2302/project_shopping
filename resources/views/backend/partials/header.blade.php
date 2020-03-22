@@ -36,7 +36,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Cá nhân</a>
+                <a href="{{ route('backend.profile.index') }}" class="btn btn-default btn-flat">Cá nhân</a>
                 </div>
                 <div class="pull-right">
                   <a class="btn btn-default btn-flat" href="{{ route('logout') }}"

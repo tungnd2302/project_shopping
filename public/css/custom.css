@@ -123,3 +123,24 @@ margin-bottom: 15px
     padding-top: 30px;
 }
 
+.cus_img_middle{
+    text-align: center;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background-color: #444444;
+    margin: 0px auto;
+}
+
+.cus_name{
+    text-align: center;
+}
+
+.box_timeline{
+    padding: 0px 14px
+}
+
+.cus_info p { 
+    font-size: 16px;
+}
+
