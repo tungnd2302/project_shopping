@@ -21,7 +21,7 @@
               <div style="height: 600px;padding-top: 30px;">
                 <div class="product_Image">
 
-                    {{-- <img src="{{ $product->images->path }}" > --}}
+                    <img src="{{ $images[0]->path }}" >
                 </div>
                 <div class="hr_bot"></div>
                 <div class="product-infomation">

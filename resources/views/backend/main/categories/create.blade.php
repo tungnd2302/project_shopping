@@ -16,22 +16,23 @@
           <h4>Thêm mới</h4>
         </div>
         <div class="panel-body">
-          <form action="#" method="post">
+          <form role="form" action="{{ route('backend.category.store') }}" id="my_form" method="post">
             @csrf
                 <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Tên loại sản phẩm</span>
                   </div>
-                  <input type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên loại sản phẩm">
+                  <input type="text" name="name" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên loại sản phẩm">
                 </div>
                 <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Trạng thái</span>
                   </div>
-                  <select class="custom-form-control" style="margin-top: 10px">
-                    <option value="">-- Chọn trạng thái --</option>
-                    <option value="">Đang mở bán</option>
-                    <option value="">Đang đóng</option>
+                  <select class="custom-form-control" name="parent_id" style="margin-top: 10px">
+                    <option value="0">-- Chọn danh mục --</option>
+                    @foreach($categories as $category)
+                      <option value="{{ $category->id }}"> {{ $category->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">

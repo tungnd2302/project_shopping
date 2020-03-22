@@ -45,87 +45,35 @@
           <table class="table table-bordered" bgcolor="#333">
             <tr>
               <th width="3%" style="text-align: center;">#</th>
-              <th width="25%" >Tên loại mặt hàng</th>
-              <th width="20%">Ngày tạo</th>
-              <th width="20%">Trạng thái</th>
-              <th>Thao tác</th>
+              <th width="35%" >Tên loại mặt hàng</th>
+              <th width="15%">Ngày tạo</th>
+              <th width="35%">Thao tác</th>
             </tr>
+            @foreach($categories as $key => $category)
+              <tr>
+                <td>{{ $categories->firstItem() + $key }}</td>
+                <td>{{ $category->name }}</td>
+                <td>{{ date('d-m-Y', strtotime($category->created_at)) }}
+                </td>
+                <td>
+                   <a href="{{ route('backend.category.edit', $category->id) }}" class="btn btn-primary" style="margin-left: 5px;">
+                     <span style="margin-right: 3px">Sửa</span>
+                    <span class="fa fa-pencil"></span>
+                  </a>
+                   <a href="" class="btn btn-danger">
+                    <span style="margin-right: 3px">Xóa</span>
+                    <span class="fa fa-trash"></span>
+                  </a>
+                </td>
+              </tr>
+            @endforeach
             <tr>
-              <td>1</td>
-              <td>Loại sản phẩm 1</td>
-              <td>17-2-2020</td>
-              <td>Đang mở bán</td>
-              <td>
-                 <a href="{{ url('/categories/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Loại sản phẩm 2</td>
-              <td>30-1-2020</td>
-              <td>Đang mở bán</td>
-              <td>
-                 <a href="{{ url('/categories/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Loại sản phẩm 3</td>
-              <td>1-1-2020</td>
-              <td>Đang mở bán</td>
-              <td>
-                 <a href="{{ url('/categories/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Loại sản phẩm 4</td>
-              <td>10-12-2019</td>
-              <td>Ngừng bán</td>
-              <td>
-                 <a href="{{ url('/categories/edit/14') }}" class="btn btn-primary" style="margin-left: 5px;">
-                   <span style="margin-right: 3px">Sửa</span>
-                  <span class="fa fa-pencil"></span>
-                </a>
-                 <a href="" class="btn btn-danger">
-                  <span style="margin-right: 3px">Xóa</span>
-                  <span class="fa fa-trash"></span>
-                </a>
-              </td>
-            </tr>
           </table>
-          <ul class="pagination pagination">
-  <li class="active"><a href="#">1</a></li>
-  <li><a href="#">2</a></li>
-  <li><a href="#">3</a></li>
-  <li><a href="#">4</a></li>
-  <li><a href="#">5</a></li>
-</ul>
+          {{ $categories->render() }}
         </div>
       </div> 
     </section>
-    
+    @include('sweetalert::alert')
     <!-- /.content -->
   </div>
 @endsection

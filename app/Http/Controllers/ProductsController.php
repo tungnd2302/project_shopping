@@ -51,7 +51,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
         $product = new Product();
         $product->name = $request->get('name');
         $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
@@ -118,9 +118,13 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
+
         $product = Product::find($id);
+        $images = $product->images;
+        // dd($product);
         return view('backend.main.products.show')->with([
-            'product' => $product
+            'product' => $product,
+            'images' => $images,
         ]);
     }
 
@@ -156,7 +160,8 @@ class ProductsController extends Controller
     public function destroy($id)
     {
          Product::destroy($id);
-         return redirect()->route('backend.product.index');
+         alert()->success('Xóa sản phẩm thành công', 'Successfully');
+         return redirect()->back();
     }
 
     // Thêm số lượng sản phẩm

@@ -60,7 +60,13 @@
                 <!-- The user image in the navbar-->
                 <img src="{{ asset('images/user2-160x160.jpg') }}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">{{ Illuminate\Support\Facades\Auth::user()->name }}</span>
+                <span class="hidden-xs">
+                  @if( Illuminate\Support\Facades\Auth::user()->userInfo->fullname != null )
+                 {{ Illuminate\Support\Facades\Auth::user()->userInfo->fullname }} 
+                 @else
+                  {{ Illuminate\Support\Facades\Auth::user()->name }} 
+                  @endif
+                </span>
               </a>
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->

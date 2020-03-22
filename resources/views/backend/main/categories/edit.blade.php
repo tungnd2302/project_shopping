@@ -16,21 +16,24 @@
           <h4>Sửa</h4>
         </div>
         <div class="panel-body">
-          <form action="#" method="post">
+          <form action="{{ route('backend.category.update', $categorychose->id) }}" role="form" method="post">
             @csrf
+            <input name="_method" type="hidden" value="PUT">
                 <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Tên loại sản phẩm</span>
                   </div>
-                  <input type="text" class="custom-form-control" style="margin-top: 10px" value="Sản phẩm 1" placeholder="Nhập tên loại sản phẩm">
+                  <input type="text" name="name" class="custom-form-control" style="margin-top: 10px" value="{{ $categorychose->name }}" placeholder="Nhập tên loại sản phẩm">
                 </div>
                 <div class="col-md-6">
                   <div>
                     <span style="font-size: 20px">Trạng thái</span>
                   </div>
-                  <select class="custom-form-control" style="margin-top: 10px">
-                    <option value="" selected>Đang mở bán</option>
-                    <option value="">Đang đóng</option>
+                  <select class="custom-form-control" name="parent_id" style="margin-top: 10px">
+                    <option value="0">Danh mục cha</option>
+                    @foreach($categories as $category)
+                      <option value="{{ $category->id }}" @if($categorychose->parent_id == $category->id) Selected @endif> {{ $category->name }}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
