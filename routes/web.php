@@ -117,6 +117,9 @@
 		Route::get('/timeline','ProfileController@timeline')->name('backend.profile.timeline');
 		Route::get('/editprofile','ProfileController@editprofile')->name('backend.profile.editprofile');
 		Route::get('/changepassword','ProfileController@changepassword')->name('backend.profile.changepassword');
+		Route::post('/updateprofile','ProfileController@updateprofile')->name('backend.profile.updateprofile');
+		Route::get('/select2-autocomplete-ajax','ProfileController@dataAjax')->name('backend.profile.select2-autocomplete-ajax');
+		Route::post('/updatepassword','ProfileController@updatepassword')->name('backend.profile.updatepassword');
 	});
 	
 	Auth::routes();

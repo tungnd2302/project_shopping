@@ -5,30 +5,40 @@
               <table class="table table-bordered" style="font-size: 18px">
                 <tr>
                   <th>Họ tên</th>
-                  <td>Nguyễn Đức Tùng</td>
+                  <td>{{ $user->userInfo->fullname }}</td>
                 </tr>
     
                 <tr>
                   <th>Chức vụ</th>
-                  <td>Admininstrator</td>
+                  <td>{{ $user->roles[0]->name }}</td>
                 </tr>
     
                 <tr>
                   <th>Email</th>
-                  <td>admin@gmail.com</td>
+                  <td>{{ $user->email }}</td>
                 </tr>
     
                 <tr>
                   <th>Ngày sinh</th>
-                  <td>23-02-1998</td>
+                  <td>{{ date('d-m-Y',strtotime($user->userInfo->birthday)) }}</td>
                 </tr>
     
                 <tr>
                   <th>Số điện thoại</th>
-                  <td>0966-637-498</td>
+                  <td>
+                    @php
+                         $data = $user->userInfo->phone;
+                         $phone = sprintf("%s-%s-%s",
+                                                      substr($data, 0, 4),
+                                                      substr($data, 4, 3),
+                                                      substr($data, 7, 3));
+                         echo $phone
+                    @endphp
+                  </td>
                 </tr>
               </table>
             </div>
         </div>
+        @include('sweetalert::alert')
         <!-- /.box -->
   @endsection   

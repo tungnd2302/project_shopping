@@ -9,21 +9,22 @@
                     <div class="form-group">
                       <label>Chọn hình thức</label>
                       <div class="radio">
-                        <label><input type="radio" name="optradio" checked>Đăng lên tường nhà bạn</label>
+                        <label>
+                            <input type="radio" class="cus_rad" name="optradio" value="self" checked>Đăng lên tường nhà bạn
+                        </label>
                       </div>
                       <div class="radio">
-                        <label><input type="radio" name="optradio">Đăng lên tường bạn của bạn</label>
+                        <label>
+                            <input type="radio" class="cus_rad" name="optradio" value="friends">Đăng lên tường bạn của bạn
+                        </label>
                       </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="chooseFriends" style="display: none">
                         <label>Chọn bạn bè </label>
-                        <select class="form-control">
-                            <option>Nguyễn Khánh L</option>
-                            <option>Nguyễn Đức T</option>
-                        </select>
-                      </div>
-
+                        <select class="itemName form-control" style="width:100%;height: 52px" name="itemName"></select>
+                    </div>
+                      
                     <div class="form-group">
                       <label>Nhập nội dung</label>
                       <input type="text" class="form-control">
@@ -82,6 +83,36 @@
     
     <!-- /.box -->
     <script>
+       $('input[type=radio][name=optradio]').change(function() {
+            if(this.value == "friends"){
+                $("#chooseFriends").css({
+                    display : 'block'
+                })
+            }else{
+                $("#chooseFriends").css({
+                    display : 'none'
+                })
+            }
+    });
 
+    $('.itemName').select2({
+        placeholder: 'Chọn bạn bè',
+        ajax: {
+          url: "{{ route('backend.profile.select2-autocomplete-ajax') }}",
+          dataType: 'json',
+          delay: 250,
+          processResults: function (data) {
+            return {
+              results:  $.map(data, function (item) {
+                    return {
+                        text: item.fullname,
+                        id: item.userid
+                    }
+                })
+            };
+          },
+          cache: true
+        }
+      });
     </script>
   @endsection   
