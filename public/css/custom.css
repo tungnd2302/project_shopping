@@ -144,3 +144,22 @@ margin-bottom: 15px
     font-size: 16px;
 }
 
+.cus_img_middle:hover  div.cus_inside_img_middle{
+    display: block;
+    background-color: rgba(255,255,255,.2);
+
+}
+
+.cus_inside_img_middle{
+    height: 150px;
+    border-radius: 50%;
+    display:none;
+    padding-top: 65px;
+}
+
+.cus_inside_img_middle span{
+    color: #fff;
+    cursor: pointer;
+    margin-left: 5px;
+}
+

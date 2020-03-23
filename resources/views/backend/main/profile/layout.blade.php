@@ -92,13 +92,18 @@
                
             </div>
             <div class="col-md-12" style="width:100%;margin-top:-130px;">
-                  <div class="cus_img_middle"></div>
+                  <div class="cus_img_middle">
+                      <div  class="cus_inside_img_middle">
+                        <span class="fa fa-camera"></span>
+                        <span id="uploadButton">Cập nhật</span>
+                      </div>
+                  </div>
                   <div class="cus_name">
                   <h2>{{ Auth::user()->name }}</h2>
                   </div>
             </div>
         </div>
-
+        <input type="file" id="fileUpload">
         <div class="row" style="margin-top: 10px; ">
           <nav class="navbar ">
             <div class="container-fluid">
@@ -147,5 +152,17 @@
         autoclose: true,
         format: 'yyyy-mm-dd'
       })
-  </script>  
+
+  $("#uploadButton").click(function(){
+    $("#fileUpload").trigger("click");
+  })
+
+  $('input[type="file"]'). change(function(e){
+    var fileName = e. target. files[0]. name;
+    console.log('The file' + fileName);
+    $.ajax({
+      
+    })
+  })
+</script>  
 </html>
