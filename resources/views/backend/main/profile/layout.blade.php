@@ -94,7 +94,15 @@
             </div>
             <div class="col-md-12" style="width:100%;margin-top:-130px;">
                   <div class="cus_img_middle">
-                  <img id="profileImg" src="{{ asset('images/users/'.Auth::user()->userInfo->avatar) }}"  style="    height: 150px;
+                    @php
+                        $avaUser = '';
+                        if(!Auth::user()->userInfo->avatar == null){
+                          $avaUser = Auth::user()->userInfo->avatar;
+                        }else{
+                          $avaUser = 'noavatar.png';
+                        }
+                    @endphp
+                  <img id="profileImg" src="{{ asset('images/users/'.$avaUser) }}"  style="    height: 150px;
                   width: 150px; border-radius: 50%; z-index: -1"/>
                       <div  class="cus_inside_img_middle">
                         <span class="fa fa-camera"></span>
