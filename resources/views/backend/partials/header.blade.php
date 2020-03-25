@@ -19,7 +19,7 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('images/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+              <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="user-image" alt="User Image">
               <span class="hidden-xs">
                 @if( Illuminate\Support\Facades\Auth::user()->userInfo->fullname != null )
                  {{ Illuminate\Support\Facades\Auth::user()->userInfo->fullname }} 
@@ -31,7 +31,7 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="img-circle" alt="User Image">
 
                 <p>
                   Alexander Pierce - Web Developer

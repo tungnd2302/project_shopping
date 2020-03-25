@@ -20,7 +20,7 @@
             <div class="col-md-3 col-xl-2 wrapped-by-border ">
               <div style="height: 600px;padding-top: 30px;">
                 <div class="product_Image">
-                    <img src="{{ asset('images/user2-160x160.jpg') }}" >
+                    <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" >
                 </div>
                 <div class="hr_bot"></div>
                 <div class="customer-infomation">

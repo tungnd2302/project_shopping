@@ -58,7 +58,7 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="{{ asset('images/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">
                   @if( Illuminate\Support\Facades\Auth::user()->userInfo->fullname != null )
@@ -71,7 +71,7 @@
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="{{ asset('images/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                  <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="img-circle" alt="User Image">
 
                   <p>
                     Alexander Pierce - Web Developer

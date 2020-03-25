@@ -94,20 +94,21 @@
             </div>
             <div class="col-md-12" style="width:100%;margin-top:-130px;">
                   <div class="cus_img_middle">
-                    @php
-                        $avaUser = '';
-                        if(!Auth::user()->userInfo->avatar == null){
-                          $avaUser = Auth::user()->userInfo->avatar;
-                        }else{
-                          $avaUser = 'noavatar.png';
-                        }
-                    @endphp
-                  <img id="profileImg" src="{{ asset('images/users/'.$avaUser) }}"  style="    height: 150px;
+                  @if(!Auth::user()->userInfo->avatar == null)
+                  <img id="profileImg" src="{{ asset('images/users/'.Auth::user()->userInfo->avatar) }}"  style="    height: 150px;
                   width: 150px; border-radius: 50%; z-index: -1"/>
-                      <div  class="cus_inside_img_middle">
+                  <div  class="cus_inside_img_middle">
                         <span class="fa fa-camera"></span>
                         <span id="uploadButton">Cập nhật</span>
                       </div>
+                  @else
+                   <img id="profileImg" src="{{asset('images/users/noavatar.png')}}"  style="    height: 150px;
+                  width: 150px; border-radius: 50%; z-index: -1"/>
+                      <div class="cus_inside_img_middle" style="display: block !important;">
+                        <span class="fa fa-camera"></span>
+                        <span id="uploadButton">Cập nhật</span>
+                      </div>
+                    @endif
                   </div>
                   <div class="cus_name">
                   <h2>{{ Auth::user()->name }}</h2>

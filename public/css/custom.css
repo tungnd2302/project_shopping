@@ -130,6 +130,7 @@ margin-bottom: 15px
     border-radius: 50%;
     background-color: #444444;
     margin: 0px auto;
+    transition: 2s;
 }
 
 .cus_name{
@@ -147,6 +148,7 @@ margin-bottom: 15px
 .cus_img_middle:hover  div.cus_inside_img_middle{
     display: block;
     background-color: rgba(255, 255, 255, 0.5);
+    transition: 2s;
 
 }
 
@@ -157,6 +159,8 @@ margin-bottom: 15px
     padding-top: 65px;
     position: relative;
     top: -150px;
+    transition: 2s;
+
 }
 
 .cus_inside_img_middle span{
