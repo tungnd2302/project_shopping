@@ -120,6 +120,7 @@
 		Route::post('/updateprofile','ProfileController@updateprofile')->name('backend.profile.updateprofile');
 		Route::get('/select2-autocomplete-ajax','ProfileController@dataAjax')->name('backend.profile.select2-autocomplete-ajax');
 		Route::put('/updatepassword/{id}','ProfileController@updatepassword')->name('backend.profile.updatepassword');
+		Route::post('/uploadimgAjax','ProfileController@uploadimgAjax')->name('backend.profile.uploadimgAjax');
 	});
 	
 	Auth::routes();

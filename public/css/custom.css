@@ -146,7 +146,7 @@ margin-bottom: 15px
 
 .cus_img_middle:hover  div.cus_inside_img_middle{
     display: block;
-    background-color: rgba(255,255,255,.2);
+    background-color: rgba(255, 255, 255, 0.5);
 
 }
 
@@ -155,10 +155,12 @@ margin-bottom: 15px
     border-radius: 50%;
     display:none;
     padding-top: 65px;
+    position: relative;
+    top: -150px;
 }
 
 .cus_inside_img_middle span{
-    color: #fff;
+    color: #333;
     cursor: pointer;
     margin-left: 5px;
 }

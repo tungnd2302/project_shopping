@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>AdminLTE 2 | Top Navigation</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -93,6 +94,16 @@
             </div>
             <div class="col-md-12" style="width:100%;margin-top:-130px;">
                   <div class="cus_img_middle">
+                    @php
+                        $avaUser = '';
+                        if(!Auth::user()->userInfo->avatar == null){
+                          $avaUser = Auth::user()->userInfo->avatar;
+                        }else{
+                          $avaUser = 'noavatar.png';
+                        }
+                    @endphp
+                  <img id="profileImg" src="{{ asset('images/users/'.$avaUser) }}"  style="    height: 150px;
+                  width: 150px; border-radius: 50%; z-index: -1"/>
                       <div  class="cus_inside_img_middle">
                         <span class="fa fa-camera"></span>
                         <span id="uploadButton">Cập nhật</span>
@@ -103,7 +114,9 @@
                   </div>
             </div>
         </div>
-        <input type="file" id="fileUpload">
+        <form id="myForm" method="post" enctype="multipart/form-data" >
+          <input type="file" id="fileUpload" name="image" style="display: none">
+        </form>
         <div class="row" style="margin-top: 10px; ">
           <nav class="navbar ">
             <div class="container-fluid">
@@ -157,12 +170,44 @@
     $("#fileUpload").trigger("click");
   })
 
+  // $('input[type="file"]'). change(function(e){
+  //   var fileName = e. target. files[0]. name;
+  //   console.log('The file' + fileName);
+  //   $.ajax({
+  //     headers: {
+  //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  //     },
+  //     url : "{{ route('backend.profile.uploadimgAjax') }}",
+  //     type : "post",
+  //     data : {
+  //       imgName : fileName,             
+  //     },
+  //     success : function ($result){
+  //       console.log($result);
+  //     }
+  //     });
+  // })
+
   $('input[type="file"]'). change(function(e){
-    var fileName = e. target. files[0]. name;
-    console.log('The file' + fileName);
+    e.preventDefault();    
+    var formData = new FormData(document.getElementById("myForm"));
+    
+
     $.ajax({
-      
-    })
-  })
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+        url : "{{ route('backend.profile.uploadimgAjax') }}",
+        type: 'POST',
+        data: formData, 
+        success: function (result) {
+          console.log(result);
+          $("#profileImg").attr("src",`{{ asset('images/users/${result}')}}`);
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+});
 </script>  
 </html>

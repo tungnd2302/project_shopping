@@ -121,4 +121,31 @@ class ProfileController extends Controller
             }
     }
 
+    public function uploadimgAjax(Request $request){
+    //    echo '<pre>';
+    //    print_r($request->all());
+        // if ($request->hasFile('images')) {
+        //     $file = $request->file('images');
+        //     $name = $file->getClientOriginalName();
+        //     $avatar = $file->move('users', $name);
+        // }
+
+        if ($files = $request->file('image')) {
+            $destinationPath = 'images/users'; // upload path
+            $profileImage = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath, $profileImage);
+            
+            $user = Users::find(Auth::user()->id);
+            $user_info = userInfo::where('user_id', '=', $user->id)->firstOrFail();
+            $userid = $user_info->id;
+            $userInfo = userInfo::find($userid);
+            $userInfo->avatar = $profileImage;
+            $userInfo->save();
+
+            echo $profileImage;
+         }else{
+            echo "không";
+        }
+    }
+
 }
