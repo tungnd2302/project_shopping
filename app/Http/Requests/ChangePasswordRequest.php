@@ -21,7 +21,7 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'oldpassword'     => ['required'],
-            'password'        => ['required'],
+            'passwordnew'        => ['required'],
             'repassword'      => ['required','same:password'],
         ];
     }
@@ -38,7 +38,7 @@ class ChangePasswordRequest extends FormRequest
     {
         return [
             'oldpassword'      => 'Mật khẩu cũ',
-            'password'         => 'Mật khẩu',
+            'passwordnew'         => 'Mật khẩu',
             'repassword'       => 'Mật khẩu',
         ];
     }

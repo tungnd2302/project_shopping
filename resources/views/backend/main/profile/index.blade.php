@@ -41,4 +41,4 @@
         </div>
         @include('sweetalert::alert')
         <!-- /.box -->
-  @endsection   
+  @endsection

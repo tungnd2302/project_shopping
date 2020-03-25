@@ -11,6 +11,7 @@ use DB;
 use Auth;
 use App\Http\Requests\UpdateProfilerequest;
 use App\Http\Requests\ChangePasswordRequest;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -70,7 +71,10 @@ class ProfileController extends Controller
     }
 
     public function changepassword(){
-        return view('backend.main.profile.changepassword');
+        $user = Auth::user();
+        return view('backend.main.profile.changepassword')->with([
+            'user' => $user
+        ]);
     }
 
     public function dataAjax(Request $request)
@@ -94,17 +98,27 @@ class ProfileController extends Controller
         return response()->json($data);
     }
 
-    public function updatepassword(ChangePasswordRequest $request)
+    public function updatepassword(Request $request, $id)
     {
-        dd(bcrypt($request->oldpassword));
-        die;
-        $userid = Auth::user()->id;
-        $user = Users::find($userid);
-        if($user->password != bcrypt($request->oldpassword)){
-            return redirect()->route('backend.profile.changepassword')->withErrors("Mật khẩu cũ chưa đúng");
+        $user = Users::find($id);
+        $passwordold = $request->get('oldpassword');
+        $passwordnew = $request->get('passwordnew');
+        $repasswordnew = $request->get('repassword');
+        $credentials = $user->only('email', 'password');
+        if (empty($passwordold) || empty($passwordold) || empty($passwordold)) {
+            return redirect()->route('backend.profile.changepassword')->withErrors("Trường nhập không được để trống");
+        }elseif ( $passwordnew != $repasswordnew) {
+            return redirect()->route('backend.profile.changepassword')->withErrors("Mật khẩu mới không trùng nhau");
+        }elseif (Hash::check($passwordold,$user->password)) {
+            $user->password = bcrypt($passwordnew);
+            $save = $user->save();
+            if ($save) {
+                alert()->success('Đổi mật khẩu thành công', 'Successfully');
+            }
+            return redirect()->route('backend.profile.index');
         }else{
-            echo 'đúng rồi';
-        }
+            return redirect()->route('backend.profile.changepassword')->withErrors("Mật khẩu nhập vào không khớp với mật khẩu ban đầu");
+            }
     }
 
 }

@@ -11,10 +11,15 @@
                         <div class="panel-heading">
                             <h4>Đổi mật khẩu</h4>
                         </div>
+                        @if(session()->has('error5'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session()->get('error5') }}
+                            </div> 
+                        @endif
                         <div class="panel-body">
-                            <form action="{{ route('backend.profile.updatepassword') }}" method="post" id="my_form">
+                            <form action="{{ route('backend.profile.updatepassword', $user->id) }}" method="post" id="my_form">
                                 @csrf
-                               
+                               <input name="_method" type="hidden" value="PUT">
                                 <div class="col-md-12">
                                 @foreach ($errors->all() as $error)
                                     <div class="alert alert-success">
@@ -32,7 +37,7 @@
                                     <div>
                                         <span style="font-size: 20px" >Nhập mật khẩu mới</span>
                                     </div>
-                                    <input type="password" class="custom-form-control" style="margin-top: 10px" name="password" placeholder="Nhập mật khẩu">
+                                    <input type="password" class="custom-form-control" style="margin-top: 10px" name="passwordnew" placeholder="Nhập mật khẩu">
                                 </div>
                                 <div class="col-md-12" style="margin-top: 20px">
                                     <div>
@@ -59,6 +64,6 @@
         </section>
     </div>
     <script type="text/javascript" src="{{ asset('js/jsvalidation.js')}}"></script>
-{!! JsValidator::formRequest('App\Http\Requests\ChangePasswordRequest', '#my_form'); !!}
+{{-- {!! JsValidator::formRequest('App\Http\Requests\ChangePasswordRequest', '#my_form'); !!} --}}
     <!-- /.box -->
   @endsection   
