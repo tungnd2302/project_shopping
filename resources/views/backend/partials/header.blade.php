@@ -19,7 +19,11 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="user-image" alt="User Image">
+              @if(Illuminate\Support\Facades\Auth::user()->userInfo->avatar != null)
+                <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="user-image" alt="User Image">
+                @else
+                <img src="{{ asset('images/users/noavatar.png' )}}" class="user-image" alt="User Image">
+                @endif
               <span class="hidden-xs">
                 @if( Illuminate\Support\Facades\Auth::user()->userInfo->fullname != null )
                  {{ Illuminate\Support\Facades\Auth::user()->userInfo->fullname }} 
@@ -31,7 +35,11 @@
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
+                @if(Illuminate\Support\Facades\Auth::user()->userInfo->avatar != null)
                 <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="img-circle" alt="User Image">
+                @else
+                <img src="{{ asset('images/users/noavatar.png' )}}" class="img-circle" alt="User Image">
+                @endif
 
                 <p>
                   Alexander Pierce - Web Developer

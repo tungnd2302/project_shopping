@@ -4,7 +4,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
+          @if(Illuminate\Support\Facades\Auth::user()->userInfo->avatar != null)
           <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="img-circle" alt="User Image">
+          @else
+          <img src="{{ asset('images/users/noavatar.png' )}}" class="img-circle" alt="User Image">
+          @endif
         </div>
         <div class="pull-left info">
           <p>

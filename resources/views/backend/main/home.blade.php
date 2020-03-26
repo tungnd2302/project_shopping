@@ -58,7 +58,11 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="user-image" alt="User Image">
+                @if(Illuminate\Support\Facades\Auth::user()->userInfo->avatar != null)
+                  <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="user-image" alt="User Image">
+                  @else
+                  <img src="{{ asset('images/users/noavatar.png' )}}" class="user-image" alt="User Image">
+                  @endif
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">
                   @if( Illuminate\Support\Facades\Auth::user()->userInfo->fullname != null )
@@ -71,7 +75,11 @@
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="img-circle" alt="User Image">
+                  @if(Illuminate\Support\Facades\Auth::user()->userInfo->avatar != null)
+                    <img src="{{ asset('images/users/'.Illuminate\Support\Facades\Auth::user()->userInfo->avatar) }}" class="img-circle" alt="User Image">
+                    @else
+                    <img src="{{ asset('images/users/noavatar.png' )}}" class="img-circle" alt="User Image">
+                    @endif
 
                   <p>
                     Alexander Pierce - Web Developer
