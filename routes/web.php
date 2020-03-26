@@ -46,6 +46,10 @@
 		Route::get('/show/{id}','ProductsController@show')->name('backend.product.show');
 		Route::get('/addmore/{id}','ProductsController@addmore')->name('backend.product.addmore');
 		Route::delete('/destroy/{id}', 'ProductsController@destroy')->name('backend.product.destroy');
+
+		// Tùng làm
+		Route::post('/storemedia', 'ProductsController@storeMedia')->name('backend.product.storeMedia');
+
 	});
 
 	Route::prefix('/providers')->group(function () {

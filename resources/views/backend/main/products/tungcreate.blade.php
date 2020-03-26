@@ -1,5 +1,4 @@
 @extends('backend.layouts.template')
-
 @section('content')
 @include('backend.main.products.sidebar')
   <!-- Content Wrapper. Contains page content -->
@@ -22,7 +21,7 @@
                   <div>
                     <span style="font-size: 20px">Tên sản phẩm</span>
                   </div>
-                  <input type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên sản phẩm" name="name">
+                  <input type="text" value="sp1" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập tên sản phẩm" name="name">
                 </div>
                 <div class="col-md-6">
                   <div>
@@ -39,13 +38,15 @@
                   <div>
                     <span style="font-size: 20px">Giá nhập</span>
                   </div>
-                  <input name="origin_price" value="{{ old('origin_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá ban đầu">
+                  {{-- <input name="origin_price" value="{{ old('origin_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá ban đầu"> --}}
+                  <input name="origin_price" value="22" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá ban đầu"> 
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Giá bán ra</span>
                   </div>
-                  <input name="sale_price" value="{{ old('sale_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá bán ra">
+                  <input name="sale_price" value="22312" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá bán ra">
+                  {{-- <input name="sale_price" value="{{ old('sale_price') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập giá bán ra"> --}}
                 </div>
                 {{-- <div class="col-md-6" style="margin-top: 20px">
                   <div>
@@ -62,13 +63,14 @@
                   <div>
                     <span style="font-size: 20px">Chọn nhà cung cấp</span>
                   </div>
-                  <input type="text" name="supplier" style="margin-top: 10px" class="custom-form-control" placeholder="Nhà cung cấp">
+                  <input type="text" name="supplier" value="3312" style="margin-top: 10px" class="custom-form-control" placeholder="Nhà cung cấp">
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
                   <div>
                     <span style="font-size: 20px">Số lượng nhập</span>
                   </div>
-                  <input name="quantity" value="{{ old('quantity') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập số lượng nhập vào">
+                  <input name="quantity" value="2131231" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập số lượng nhập vào">
+                  {{-- <input name="quantity" value="{{ old('quantity') }}" type="text" class="custom-form-control" style="margin-top: 10px" placeholder="Nhập số lượng nhập vào"> --}}
                 </div>
                 <div class="col-md-12" style="margin-top: 20px">
                   <div>
@@ -76,7 +78,7 @@
                   </div>
                   <select name="status" value="{{ old('status') }}" class="custom-form-control" style="margin-top: 10px">
                     <option>-- Chọn loại sản phẩm --</option>
-                    <option value="0">Còn hàng</option>
+                    <option value="0" selected>Còn hàng</option>
                     <option value="1">Hết hàng</option>
                   </select>
                 </div>
@@ -84,13 +86,15 @@
                    <div>
                     <span style="font-size: 20px">Mô tả sản phẩm</span>
                   </div>
-                  <textarea name="description" id="editor1">{{ old('description') }}</textarea>
+                  <textarea name="description" id="editor1">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</textarea>
                 </div>
                 <div class="col-md-12" style="margin-top: 20px">
-                  <span style="font-size: 20px">Images</span>
-                  <br>
-                  <input type="file" autocomplete="OFF" name="images" id="item_images" placeholder="" class="custom-form-control input-sm" required />
-                  <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"> <i class="fa fa-image"></i> Upload Images</button>
+                    <div>
+                        <span style="font-size: 20px">Hình ảnh sản phẩm</span>
+                      </div>
+                    <div class="dropzone" id="my-dropzone" name="myDropzone">
+
+                    </div>
                 </div>
                 <div class="col-md-6" style="margin-top: 20px">
                    <button type="submit" class="btn btn-primary custom-button" style="width: 100%">
@@ -134,99 +138,58 @@
 <!-- MODAL END -->
 
   
-  <script type="text/javascript">
- 
-    $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-      Dropzone.autoDiscover = false;
-      var acceptedFileTypes = "image/*"; //dropzone requires this param be a comma separated list
-      // imageDataArray variable to set value in crud form
-      var imageDataArray = new Array;
-      // fileList variable to store current files index and name
-      var fileList = new Array;
-      var i = 0;
-      $(function(){
-          uploader = new Dropzone(".dropzone",{
-              url: "{{url('products/imageupload')}}",
-              paramName : "file",
-              uploadMultiple :false,
-              acceptedFiles : "image/*,video/*,audio/*",
-              addRemoveLinks: true,
-              forceFallback: false,
-              maxFilesize: 256, // Set the maximum file size to 256 MB
-              parallelUploads: 100,
-          });//end drop zone
-          uploader.on("success", function(file,response) {
-              imageDataArray.push(response)
-              fileList[i] = {
-                  "serverFileName": response,
-                  "fileName": file.name,
-                  "fileId": i
-              };
-         
-              i += 1;
-              $('#item_images').val(imageDataArray);
-          });
-          uploader.on("removedfile", function(file) {
-              var rmvFile = "";
-              for (var f = 0; f < fileList.length; f++) {
-                  if (fileList[f].fileName == file.name) {
-                      // remove file from original array by database image name
-                      imageDataArray.splice(imageDataArray.indexOf(fileList[f].serverFileName), 1);
-                      $('#item_images').val(imageDataArray);
-                      // get removed database file name
-                      rmvFile = fileList[f].serverFileName;
-                      // get request to remove the uploaded file from server
-                      $.get( "{{url('products/imagedelete')}}", { file: rmvFile } )
-                        .done(function( data ) {
-                          //console.log(data)
-                        });
-                      // reset imageDataArray variable to set value in crud form
-                      
-                      console.log(imageDataArray)
-                  }
-              }
-              
-          });
-      });
-
-    // $(document).ready(function(e){
-    //   $('#create_form').bootstrapValidator({
-    //     feedbackIcons:{
-    //       valid: 'glyphicon glyphicon-ok',
-    //       invalid: 'glyphicon glyphicon-remove',
-    //       validating:'glyphicon glyphicon-refresh' 
-    //     },
-    //     fields:{
-    //       txtTenSanPham:{
-    //         validators:{
-    //           notEmpty:{
-    //             message: 'Vui lòng nhập vào tài khoản'
+<script type="text/javascript">
+ var uploadedDocumentMap = {}
+    Dropzone.options.myDropzone= {
+        url: '{{ route('backend.product.storeMedia') }}', 
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        autoProcessQueue: true,
+        uploadMultiple: true,
+        parallelUploads: 5,
+        maxFiles: 10,
+        maxFilesize: 5,
+        addRemoveLinks: true,
+        success: function (file, response) {
+            $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
+            uploadedDocumentMap[file.name] = response.name
+            console.log('response: '+ response.name);
+        },
+    //     removedfile: function(file) {
+    //     var name = file.name;    
+    //     name =name.replace(/\s+/g, '-').toLowerCase();    /*only spaces*/
+    //      $.ajax({
+    //          type: 'POST',
+    //          url: '{{ url('admincp/deleteImg') }}',
+    //          headers: {
+    //               'X-CSRF-TOKEN': '{!! csrf_token() !!}'
     //           },
-    //           stringLength:{
-    //             min: 5,
-    //             message: 'Nhập đúng định dạng tài khoản'
-    //           }
-    //         }
-    //       },
-    //       // txtMatkhau:{
-    //       //   validators:{
-    //       //     notEmpty:{
-    //       //       message: 'Vui lòng nhập mật khẩu'
-    //       //     },
-    //       //     stringLength:{
-    //       //       min:5,
-    //       //       message: 'Nhập đúng định dạng mật khẩu'
-    //       //     }
-    //       //   }
-    //       // }
-    //     }
-    //   })
-    // })
-  </script>
+    //          data: "id="+name,
+    //          dataType: 'html',
+    //          success: function(data) {
+    //              $("#msg").html(data);
+    //          }
+    //      });
+    //    var _ref;
+    //    if (file.previewElement) {
+    //      if ((_ref = file.previewElement) != null) {
+    //        _ref.parentNode.removeChild(file.previewElement);
+    //      }
+    //    }
+    //    return this._updateMaxFilesReachedClass();
+    //  },
+     previewsContainer: null,
+     hiddenInputContainer: "body",
+    }
+ </script>
+ <style>
+     .dropzone {
+         border: 2px dashed #0087F7;
+         border-radius: 5px;
+         background: white;
+     }
+ </style>
   <script src="{{ asset('ckeditor/ckeditor/ckeditor.js') }}"></script>
   <script src="{{ asset('js/validation.js') }}"></script>
   {!! JsValidator::formRequest('App\Http\Requests\StoreProductsRequest', '#my_form'); !!}

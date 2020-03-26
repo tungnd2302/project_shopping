@@ -116,7 +116,7 @@
             </div>
         </div>
         <form id="myForm" method="post" enctype="multipart/form-data" >
-          <input type="file" id="fileUpload" name="image" style="display: none">
+          <input type="file" id="fileUpload" name="image" >
         </form>
         <div class="row" style="margin-top: 10px; ">
           <nav class="navbar ">
@@ -190,19 +190,23 @@
   // })
 
   $('input[type="file"]'). change(function(e){
+    // Tránh bị load lại trang
     e.preventDefault();    
+    // Lấy giữ liệu của Form xong lưu vào biến Formdata
     var formData = new FormData(document.getElementById("myForm"));
     
-
+    // Gọi hàm Ajax
     $.ajax({
+      // Bắt buộc phải có
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-        url : "{{ route('backend.profile.uploadimgAjax') }}",
-        type: 'POST',
-        data: formData, 
+        url : "{{ route('backend.profile.uploadimgAjax') }}", // route
+        type: 'POST', // PUT,GET
+        data: formData, // Dữ liệu để truyền đi
+        // dataType:JSON,type, 
         success: function (result) {
-          console.log(result);
+          console.log(result); // Tên file
           $("#profileImg").attr("src",`{{ asset('images/users/${result}')}}`);
         },
         cache: false,

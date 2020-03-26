@@ -38,7 +38,7 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::all();
-       return view('backend.main.products.create')->with([
+       return view('backend.main.products.tungcreate')->with([
             'categories' => $categories
        ]);
     }
@@ -51,7 +51,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // foreach ($request->input('document', []) as $file) {
+        //    echo 'images/products/tmp/'.$file.'<br/>';
+        // }
+        // die;
+        // dd($request->input('document', []));
+        // die;
         $product = new Product();
         $product->name = $request->get('name');
         $product->slug = \Illuminate\Support\Str::slug($request->get('name'));
@@ -64,11 +69,15 @@ class ProductsController extends Controller
         $product->supplier = $request->get('supplier');
         $product->user_id = Auth::user()->id;
         $save = $product->save();
-
-        $image = new Image();
-        $image->path = $request->get('images');
-        $image->product_id= $product->id;
-        $image->save();
+        
+        foreach ($request->input('document', []) as $file) {
+            $image = new Image();
+            $image->path = $request->get('images');
+            $image->product_id= $product->id;
+            $image->path = $file;
+            $image->save();
+            rename("images/products/tmp/".$file, "images/products/".$file);
+        }
         alert()->success('Thêm sản phẩm thành công', 'Successfully');
         
         return redirect()->route('backend.product.index');
@@ -168,5 +177,41 @@ class ProductsController extends Controller
     public function addmore($id)
     {
         return view('backend.main.products.addmore');
+    }
+
+    // Tùng làm 
+    public function storeMedia(Request $request)
+    {
+        
+        // $path = storage_path('tmp/uploads');
+
+        // if (!file_exists($path)) {
+        //     mkdir($path, 0777, true);
+        // }
+
+        // $file = $request->file('file');
+
+        // $name = uniqid() . '_' . trim($file->getClientOriginalName());
+
+        // $file->move($path, $name);
+
+        // return response()->json([
+        //     'name'          => $name,
+        //     'original_name' => $file->getClientOriginalName(),
+        // ]);
+
+        if ($file = $request->file('file')) {
+          
+            $destinationPath = 'images/products/tmp'; // upload path
+            $profileImage = date('YmdHis') . "." .$file[0]->getClientOriginalName();
+          
+            $file[0]->move($destinationPath, $profileImage);
+            return response()->json([
+                'name'          => $profileImage,
+                'original_name' => $file[0]->getClientOriginalName(),
+            ]);
+        }else{
+            echo "không";
+        }
     }
 }
