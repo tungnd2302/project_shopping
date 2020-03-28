@@ -64,6 +64,9 @@
         </section>
     </div>
     <script type="text/javascript" src="{{ asset('js/jsvalidation.js')}}"></script>
+    <script type="text/javascript">
+        
+    </script>
 {{-- {!! JsValidator::formRequest('App\Http\Requests\ChangePasswordRequest', '#my_form'); !!} --}}
     <!-- /.box -->
   @endsection   

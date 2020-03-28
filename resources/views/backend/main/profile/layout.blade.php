@@ -87,26 +87,26 @@
   <div class="content-wrapper">
     <div class="container">
       <!-- Main content -->
-      <section class="content">
+      <section class="content" style="padding: 0">
         <div class="row">
             <div class="col-md-12" style="height: 300px;width:100%;background-color:#333">
                
             </div>
-            <div class="col-md-12" style="width:100%;margin-top:-130px;">
+            <div class="col-md-12" style="width:100%;margin-top:-110px;">
                   <div class="cus_img_middle">
                   @if(!Auth::user()->userInfo->avatar == null)
-                  <img id="profileImg" src="{{ asset('images/users/'.Auth::user()->userInfo->avatar) }}"  style="    height: 150px;
+                  <img id="profileImg" src="{{ asset('images/users/'.Auth::user()->userInfo->avatar) }}"  style="    height: 150px;border: 3px solid white;
                   width: 150px; border-radius: 50%; z-index: -1"/>
-                  <div  class="cus_inside_img_middle">
+                  <div class="cus_inside_img_middle">
                         <span class="fa fa-camera"></span>
                         <span id="uploadButton">Cập nhật</span>
                       </div>
                   @else
                    <img id="profileImg" src="{{asset('images/users/noavatar.png')}}"  style="    height: 150px;
-                  width: 150px; border-radius: 50%; z-index: -1"/>
+                  width: 150px;border: 3px solid white; border-radius: 50%; z-index: -1"/>
                       <div class="cus_inside_img_middle" style="display: block !important;">
                         <span class="fa fa-camera"></span>
-                        <span id="uploadButton">Cập nhật</span>
+                        <span id="uploadButton">Thêm ảnh </span>
                       </div>
                     @endif
                   </div>
@@ -115,7 +115,7 @@
                   </div>
             </div>
         </div>
-        <form id="myForm" method="post" enctype="multipart/form-data" >
+        <form id="myForm" method="post" enctype="multipart/form-data" style="display: none;" >
           <input type="file" id="fileUpload" name="image" >
         </form>
         <div class="row" style="margin-top: 10px; ">
@@ -159,9 +159,14 @@
 <script src="{{ asset('js/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/demo.js') }}"></script>
+
+<script src="{{ asset('js/notify.min.js') }}"></script>
 <!-- DATE PICKER -->
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script type="text/javascript">
+  $.when().then(function( ) {
+    $.notify('Hello World');
+  });
   $('#datepicker').datepicker({
         autoclose: true,
         format: 'yyyy-mm-dd'

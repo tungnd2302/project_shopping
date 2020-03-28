@@ -209,7 +209,13 @@
 <script src="{{ asset('js/adminlte.min.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('js/dashboard.js') }}"></script>
+<script src="{{ asset('js/notify.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('js/demo.js') }}"></script>
+<script type="text/javascript">
+  $.when().then(function() {
+    $.notify("Xin chào {{ Illuminate\Support\Facades\Auth::user()->userInfo->fullname }} ", "success");
+  });
+</script>
 </body>
 </html>

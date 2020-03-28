@@ -20,7 +20,11 @@
             <div class="col-md-3 col-xl-2 wrapped-by-border ">
               <div style="height: 600px;padding-top: 30px;">
                 <div class="product_Image">
-                    <img src="{{ asset('images/user2-160x160.jpg') }}" >
+                  @if($user->userInfo->avatar != null)
+                    <img width="160px" height="160px" src="{{ asset('images/users/'.$user->userInfo->avatar) }}" >
+                  @else
+                    <img width="160px" height="160px"  src="{{ asset('images/users/noavatar.png') }}" >
+                  @endif
                 </div>
                 <div class="hr_bot"></div>
                 <div class="product-infomation">
